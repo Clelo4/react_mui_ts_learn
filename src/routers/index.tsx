@@ -1,5 +1,5 @@
 
-import Sign from '../pages/Sign';
+import Sign from '../pages/sign';
 import ErrorPage from '../pages/errorPage';
 import { Outlet } from 'react-router-dom';import {
   createBrowserRouter,

@@ -28,6 +28,7 @@ function Copyright(props: any) {
 
 export default function SignIn() {
   const [open, setOpen] = React.useState(false);
+  console.log('use state open: ', typeof open, open);
   const handleClose = () => {
     setOpen(false);
   };

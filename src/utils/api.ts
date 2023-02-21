@@ -1,5 +1,7 @@
+import { sleep } from "./index";
 
 export const login = async(data: any) => {
+  await sleep(2000);
   return await fetch('/api/login', {
     method: 'post',
     headers: {
@@ -10,5 +12,5 @@ export const login = async(data: any) => {
   .then((response) => {
     if (!response.ok) throw new Error(response.statusText);
     return response.json();
-  });
+  }).catch(() => {});
 }
