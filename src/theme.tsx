@@ -1,6 +1,17 @@
-import { createTheme } from '@mui/material';
+import { ThemeOptions } from '@mui/material';
 
-export const theme = createTheme({
+declare module '@mui/material/styles' {
+  interface palette {
+    paletee: {
+      neutral: any;
+    }
+  }
+  interface PaletteOptions {
+    neutral: any;
+  }
+}
+
+export const theme: ThemeOptions  = {
   breakpoints: {
     values: {
       xs: 0,
@@ -132,6 +143,17 @@ export const theme = createTheme({
     }
   },
   palette: {
+    neutral: {
+      100: '#F3F4F6',
+      200: '#E5E7EB',
+      300: '#D1D5DB',
+      400: '#9CA3AF',
+      500: '#6B7280',
+      600: '#4B5563',
+      700: '#374151',
+      800: '#1F2937',
+      900: '#111827'
+    },
     action: {
       active: '#6B7280',
       focus: 'rgba(55, 65, 81, 0.12)',
@@ -285,6 +307,6 @@ export const theme = createTheme({
       lineHeight: 1.375
     }
   }
-});
+};
 
 export default theme;

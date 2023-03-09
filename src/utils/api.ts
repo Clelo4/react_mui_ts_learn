@@ -2,7 +2,7 @@ import { sleep } from "./index";
 
 export const login = async(data: any) => {
   await sleep(2000);
-  return await fetch('/api/login', {
+  return await fetch('/api/authless/user/login', {
     method: 'post',
     headers: {
       'Content-Type': 'application/json',

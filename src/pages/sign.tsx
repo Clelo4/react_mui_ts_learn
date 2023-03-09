@@ -28,19 +28,17 @@ function Copyright(props: any) {
 
 export default function SignIn() {
   const [open, setOpen] = React.useState(false);
-  console.log('use state open: ', typeof open, open);
   const handleClose = () => {
     setOpen(false);
   };
   const handleToggle = () => {
     setOpen(!open);
   };
-
   const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     const loginData = {
-      userName: data.get('email'),
+      username: data.get('email'),
       password: data.get('password'),
     };
     console.log({
@@ -110,11 +108,6 @@ export default function SignIn() {
                 Forgot password?
               </Link>
             </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
           </Grid>
         </Box>
       </Box>
@@ -122,7 +115,7 @@ export default function SignIn() {
       
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={open}
+        open= {open}
       >
         <CircularProgress color="inherit" />
       </Backdrop>

@@ -14,7 +14,7 @@ export default createBrowserRouter([
     ],
   },
   {
-    path: '/sign',
+    path: '/login',
     element: <Sign></Sign>,
   },
 ]);
