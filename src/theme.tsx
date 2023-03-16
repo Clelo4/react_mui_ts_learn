@@ -1,13 +1,8 @@
 import { ThemeOptions } from '@mui/material';
 
 declare module '@mui/material/styles' {
-  interface palette {
-    paletee: {
-      neutral: any;
-    }
-  }
   interface PaletteOptions {
-    neutral: any;
+    neutral: Record<number, string>;
   }
 }
 

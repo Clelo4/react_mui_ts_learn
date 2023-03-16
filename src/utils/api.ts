@@ -14,3 +14,14 @@ export const login = async(data: any) => {
     return response.json();
   }).catch(() => {});
 }
+
+export const logout = async() => {
+  await sleep(2000);
+  return await fetch('/api/authless/user/logout', {
+    method: 'post',
+  })
+  .then((response) => {
+    if (!response.ok) throw new Error(response.statusText);
+    return response.json();
+  }).catch(() => {});
+}
