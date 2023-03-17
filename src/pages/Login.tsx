@@ -42,34 +42,41 @@ export default function Login() {
 
   const handleVerificationSuccess = async (token: string, ekey: string) => {
     await sleep(500);
-    setState({ dialogOpen: false, loading: true } as LoginState);
+    setState((preState) => ({ ...preState, dialogOpen: false, loading: true }));
     try {
       const res = await api.login({ ...state.formData, hcaptchaToken: token });
       if (res.code !== 0) throw new Error(res.message);
     } catch (error) {
-      setState({ noticeMessage: String(error), showNotice: true } as LoginState);
-      console.error('123', error);
+      setState((preState) => ({ ...preState, noticeMessage: String(error), showNotice: true }));
+      console.error('api.login error', error);
     } finally {
-      setState({ loading: false } as LoginState);
+      setState((preState) => ({ ...preState, loading: false }));
     }
   }
   const handleDialogClose = () => {
-    setState({ dialogOpen: false } as LoginState);
+    setState((preState) => ({ ...preState, dialogOpen: false }));
   }
   const openDialog = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    setState({ ...state, formData: {
+    setState((preState) => ({
+      ...preState,
+      formData: {
         email: data.get('email') as LoginState['formData']['email'],
         password: data.get('password') as LoginState['formData']['password'],
       },
-      dialogOpen: true,
-    });
+      dialogOpen: true
+    }));
   }
 
   return (
     <>
-      <Notice open={state.showNotice} message={state.noticeMessage}></Notice>
+      <Notice
+        open={state.showNotice}
+        message={state.noticeMessage}
+        onClose={() => { setState((preState) => ({ ...preState, showNotice: false, noticeMessage: '' })) }}
+        type='error'
+      ></Notice>
       <Container component="main" maxWidth="xs">
         <Box
           sx={{
