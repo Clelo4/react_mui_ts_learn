@@ -1,7 +1,4 @@
-import { sleep } from "./index";
-
 export const login = async(data: any) => {
-  await sleep(2000);
   return await fetch('/api/authless/user/login', {
     method: 'post',
     headers: {
@@ -16,9 +13,18 @@ export const login = async(data: any) => {
 }
 
 export const logout = async() => {
-  await sleep(2000);
-  return await fetch('/api/authless/user/logout', {
+  return await fetch('/api/user/logout', {
     method: 'post',
+  })
+  .then((response) => {
+    if (!response.ok) throw new Error(response.statusText);
+    return response.json();
+  }).catch(() => {});
+}
+
+export const getUser = async() => {
+  return await fetch('/api/authless/user/get', {
+    method: 'get',
   })
   .then((response) => {
     if (!response.ok) throw new Error(response.statusText);

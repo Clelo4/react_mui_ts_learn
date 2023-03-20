@@ -15,7 +15,8 @@ import * as api from '../utils/api';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
 import { sleep } from '../utils';
 import Copyright from '../components/Copyright';
-import Notice from '../components/Notice';
+import Notice, { NoticePropsType } from '../components/Notice';
+import { useNavigate } from "react-router-dom";
 
 interface LoginState {
   loading: boolean,
@@ -26,9 +27,11 @@ interface LoginState {
   },
   showNotice: boolean,
   noticeMessage: string,
+  noticeType?: NoticePropsType['type']
 }
 
 export default function SignIn() {
+  const captchaRef = React.useRef<HCaptcha>(null);
   const [state, setState] = React.useState<LoginState>({
     loading: false,
     dialogOpen: false,
@@ -38,7 +41,9 @@ export default function SignIn() {
     },
     showNotice: false,
     noticeMessage: '',
+    noticeType: 'error',
   });
+  const navigate = useNavigate();
 
   const handleVerificationSuccess = async (token: string, ekey: string) => {
     await sleep(500);
@@ -46,8 +51,11 @@ export default function SignIn() {
     try {
       const res = await api.login({ ...state.formData, hcaptchaToken: token });
       if (res.code !== 0) throw new Error(res.message);
+      setState((preState) => ({ ...preState, noticeMessage: res.message || '登录成功', showNotice: true, noticeType: 'success', loading: true, }));
+      await sleep(1000);
+      navigate('/');
     } catch (error) {
-      setState((preState) => ({ ...preState, noticeMessage: String(error), showNotice: true }));
+      setState((preState) => ({ ...preState, noticeMessage: String(error), showNotice: true, noticeType: 'error' }));
       console.error('api.login error', error);
     } finally {
       setState((preState) => ({ ...preState, loading: false }));
@@ -65,17 +73,18 @@ export default function SignIn() {
         email: data.get('email') as LoginState['formData']['email'],
         password: data.get('password') as LoginState['formData']['password'],
       },
-      dialogOpen: true
+      dialogOpen: true,
     }));
+    captchaRef.current?.resetCaptcha();
   }
-
+  
   return (
     <>
       <Notice
         open={state.showNotice}
         message={state.noticeMessage}
         onClose={() => { setState((preState) => ({ ...preState, showNotice: false, noticeMessage: '' })) }}
-        type='error'
+        type={state.noticeType}
       ></Notice>
       <Container component="main" maxWidth="xs">
         <Box
@@ -156,6 +165,7 @@ export default function SignIn() {
             <HCaptcha
               sitekey="74092ba4-fd86-467b-8670-579af8ebf2d4"
               onVerify={(token,ekey) => handleVerificationSuccess(token, ekey)}
+              ref={captchaRef}
             />
           </DialogContent>
         </Dialog>

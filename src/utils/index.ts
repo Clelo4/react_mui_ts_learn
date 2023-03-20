@@ -3,3 +3,8 @@ export const sleep = async(microSecond: number) => {
     setTimeout(resolve, microSecond);
   });
 }
+
+export const isAbsoluteUrl = (url: string) => {
+  if (!url) return false;
+  return url.startsWith('http://') || url.startsWith('https://');
+}
