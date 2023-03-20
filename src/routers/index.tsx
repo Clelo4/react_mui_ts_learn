@@ -1,5 +1,5 @@
 
-import Login from '../pages/Login';
+import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
 import ErrorPage from '../pages/errorPage';
 import { Outlet } from 'react-router-dom';import {
@@ -12,18 +12,18 @@ export default createBrowserRouter([
     path: '/',
     element: <div>Hello World!<Outlet />
       <Link to="/login">login</Link>
-      <Link to="/singUp">sign up</Link>
+      <Link to="/signup">sign up</Link>
     </div>,
     errorElement: <ErrorPage />,
     children: [
     ],
   },
   {
-    path: '/login',
-    element: <Login></Login>,
+    path: '/signin',
+    element: <SignIn></SignIn>,
   },
   {
-    path: '/singUp',
+    path: '/signup',
     element: <SignUp></SignUp>,
   },
 ]);

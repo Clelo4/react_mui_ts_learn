@@ -28,7 +28,7 @@ interface LoginState {
   noticeMessage: string,
 }
 
-export default function Login() {
+export default function SignIn() {
   const [state, setState] = React.useState<LoginState>({
     loading: false,
     dialogOpen: false,
@@ -129,6 +129,11 @@ export default function Login() {
                   Forgot password?
                 </Link>
               </Grid>
+              <Grid item>
+                  <Link href="/signUp" variant="body2">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
+                </Grid>
             </Grid>
           </Box>
         </Box>
