@@ -8,6 +8,7 @@ import {
 import { getUser } from '../utils/api';
 import { redirect } from "react-router-dom";
 import Home from '../pages/Home';
+import Account from '../pages/Account';
 
 export default createBrowserRouter([
   {
@@ -15,6 +16,10 @@ export default createBrowserRouter([
     element: <Home />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: 'account',
+        element: <Account />,
+      }
     ],
   },
   {
@@ -23,7 +28,7 @@ export default createBrowserRouter([
     loader: async () => {
       const res = await getUser();
       if (res.code === 0) {
-        return redirect("/");
+        return redirect("/account");
       }
       return null;
     },
@@ -34,7 +39,7 @@ export default createBrowserRouter([
     loader: async () => {
       const res = await getUser();
       if (res.code === 0) {
-        return redirect("/");
+        return redirect("/account");
       }
       return null;
     },
