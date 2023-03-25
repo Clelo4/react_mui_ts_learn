@@ -1,46 +1,23 @@
 import { lazy } from 'react';
-
-// project imports
-import Loadable from 'ui-component/Loadable';
+import Loadable from 'components/Loadable';
 import MinimalLayout from 'layout/MinimalLayout';
-import SignIn from 'pages/SignIn';
-import SignUp from 'pages/SignUp';
-import { getUser } from 'utils/api';
-import { redirect } from "react-router-dom";
 
-// login option 3 routing
-const AuthLogin3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/Login3')));
-const AuthRegister3 = Loadable(lazy(() => import('views/pages/authentication/authentication3/Register3')));
+const SignIn = Loadable(lazy(() => import('pages/SignIn')));
+const SignUp = Loadable(lazy(() => import('pages/SignUp')));
 
-// ==============================|| AUTHENTICATION ROUTING ||============================== //
-
-const AuthenticationRoutes = {
+const AuthenticationRoutes = [{
     path: '/',
     element: <MinimalLayout />,
     children: [
       {
         path: '/signin',
-        element: <SignIn></SignIn>,
-        loader: async () => {
-          const res = await getUser();
-          if (res.code === 0) {
-            return redirect("/account");
-          }
-          return null;
-        },
+        element: <SignIn />,
       },
       {
         path: '/signup',
-        element: <SignUp></SignUp>,
-        loader: async () => {
-          const res = await getUser();
-          if (res.code === 0) {
-            return redirect("/account");
-          }
-          return null;
-        },
+        element: <SignUp />,
       },
     ]
-};
+}];
 
 export default AuthenticationRoutes;

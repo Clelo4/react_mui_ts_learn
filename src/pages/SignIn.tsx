@@ -139,7 +139,7 @@ export default function SignIn() {
                 </Link>
               </Grid>
               <Grid item>
-                  <Link href="/signUp" variant="body2">
+                  <Link variant="body2" onClick={(event) => { event.preventDefault(); navigate('/signup'); }}>
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>

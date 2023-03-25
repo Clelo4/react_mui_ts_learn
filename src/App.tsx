@@ -5,27 +5,31 @@ import {
 import router from 'routers/index';
 import 'App.css';
 import CssBaseline from '@mui/material/CssBaseline';
-import { StyledEngineProvider } from '@mui/material';
 import themeOption from 'theme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import React from 'react';
+// import { useSelector } from 'react-redux';
+// import { StyledEngineProvider } from '@mui/material';
 
 function App() {
+  const customization: boolean = (+new Date()) % 2 === 0;
+  // = useSelector((state) => state.customization)
   const preferDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
   const theme = React.useMemo(() => {
     const newTheme = { ...themeOption };
     if (newTheme.palette)
       newTheme.palette.mode = preferDarkMode ? 'dark': 'light';
     return createTheme(newTheme);
-  }, [preferDarkMode]);
+  }, [preferDarkMode, customization]);
 
   return (
-    <StyledEngineProvider injectFirst>
+    // <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
         <CssBaseline></CssBaseline>
         <RouterProvider router={router}></RouterProvider>
       </ThemeProvider>
-    </StyledEngineProvider>
+    // </StyledEngineProvider>
   );
 }
 
