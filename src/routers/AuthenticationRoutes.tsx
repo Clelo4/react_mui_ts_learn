@@ -1,9 +1,8 @@
-import { lazy } from 'react';
-import Loadable from 'components/Loadable';
+import LazyLoader from 'components/LazyLoader';
 import MinimalLayout from 'layout/MinimalLayout';
 
-const SignIn = Loadable(lazy(() => import('pages/SignIn')));
-const SignUp = Loadable(lazy(() => import('pages/SignUp')));
+const SignIn = LazyLoader(() => import('pages/SignIn'));
+const SignUp = LazyLoader(() => import('pages/SignUp'));
 
 const AuthenticationRoutes = [{
     path: '/',

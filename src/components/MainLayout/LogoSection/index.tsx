@@ -1,21 +1,11 @@
 import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-
-// material-ui
 import { ButtonBase } from '@mui/material';
 
-// project imports
-import config from 'config';
-import Logo from 'ui-component/Logo';
-// import { MENU_OPEN } from 'store/actions';
-
-// ==============================|| MAIN LOGO ||============================== //
+import Logo from 'components/Logo';
 
 const LogoSection = () => {
-    // const defaultId = useSelector((state) => state.customization.defaultId);
-    // const dispatch = useDispatch();
     return (
-        <ButtonBase disableRipple component={Link} to={config.defaultPath}>
+        <ButtonBase disableRipple component={Link} to={'/'}>
             <Logo />
         </ButtonBase>
     );

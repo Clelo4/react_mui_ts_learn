@@ -31,7 +31,7 @@ interface SignUpState {
 }
 
 export default class SignUp extends React.Component<{}, SignUpState> {
-  constructor(props: Record<string, string>) {
+  constructor(props: {}) {
     super(props);
     this.state = {
       alert: false,
