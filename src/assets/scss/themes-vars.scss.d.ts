@@ -21,6 +21,7 @@ export const errorMain: string;
 export const grey100: string;
 export const grey200: string;
 export const grey300: string;
+export const grey400: string;
 export const grey50: string;
 export const grey500: string;
 export const grey600: string;
