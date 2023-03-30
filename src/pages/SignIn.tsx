@@ -13,6 +13,8 @@ import * as api from '../utils/api';
 import { sleep } from '../utils';
 import Copyright from '../components/Copyright';
 import Notice from '../components/Notice';
+import { addBorderRadiusAction } from 'store/customizationSlice';
+import { useAppDispatch } from 'store/hooks';
 
 import type { NoticePropsType } from '../components/Notice';
 
@@ -29,6 +31,7 @@ interface LoginState {
 }
 
 export default function SignIn() {
+  const dispath = useAppDispatch();
 
   const captchaRef = React.useRef<HCaptcha>(null);
   const [state, setState] = React.useState<LoginState>({
@@ -86,6 +89,7 @@ export default function SignIn() {
         type={state.noticeType}
       ></Notice>
       <Container component="main" maxWidth="xs">
+        <Button onClick={() => dispath(addBorderRadiusAction())}>Add BorderRadius</Button>
         <Box
           sx={{
             marginTop: 8,

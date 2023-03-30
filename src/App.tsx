@@ -13,6 +13,7 @@ function App() {
   const customization = useAppSelector((state) => state.customization)
 
   const theme = React.useMemo(() => {
+    console.log('customization change');
     return themeFactory(customization);
   }, [customization]);
 
