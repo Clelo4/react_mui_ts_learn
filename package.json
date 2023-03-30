@@ -9,6 +9,7 @@
     "@hcaptcha/react-hcaptcha": "^1.4.4",
     "@mui/icons-material": "^5.11.9",
     "@mui/material": "^5.11.9",
+    "@reduxjs/toolkit": "^1.9.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@redux-devtools/core": "^3.13.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "http-proxy-middleware": "^2.0.6",
     "sass": "^1.60.0",
