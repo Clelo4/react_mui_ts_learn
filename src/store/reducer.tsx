@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
-import customizationReducer from './customizationReducer';
+
+import customizationReducer from './customizationSlice';
 
 const reducer = combineReducers({
     customization: customizationReducer

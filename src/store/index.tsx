@@ -1,23 +1,14 @@
-import { createStore } from 'redux';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import config from '../config';
+import { configureStore } from '@reduxjs/toolkit';
 
-interface CounterState {
-  isOpen: any[],
-  defaultId: string,
-  fontFamily: typeof config.fontFamily,
-  borderRadius: typeof config.borderRadius,
-  opened: boolean,
-}
+import customizationReducer from './customizationSlice';
 
-const initialState: CounterState = {
-  isOpen: [], // for active default menu
-  defaultId: 'default',
-  fontFamily: config.fontFamily,
-  borderRadius: config.borderRadius,
-  opened: true
-}
+const store = configureStore({
+  reducer: {
+    customization: customizationReducer
+  }
+});
 
-import reducer from './reducer';
+export type AppStateType = ReturnType<typeof store.getState>
+export type AppDispathType = typeof store.dispatch;
 
-export const store = createStore(reducer);
+export default store;

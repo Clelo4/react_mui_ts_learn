@@ -1,21 +1,20 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import React from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { Backdrop, CircularProgress, Dialog, DialogContent, DialogTitle } from '@mui/material';
-import * as api from '../utils/api';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
+import { useNavigate, Link } from "react-router-dom";
+import { Avatar, Button, TextField,
+  FormControlLabel, Checkbox, Grid,
+  Box, Typography, Container, Backdrop,
+  CircularProgress, Dialog, DialogContent,
+  DialogTitle
+} from '@mui/material';
+
+import * as api from '../utils/api';
 import { sleep } from '../utils';
 import Copyright from '../components/Copyright';
-import Notice, { NoticePropsType } from '../components/Notice';
-import { useNavigate, Link } from "react-router-dom";
+import Notice from '../components/Notice';
+
+import type { NoticePropsType } from '../components/Notice';
 
 interface LoginState {
   loading: boolean,
@@ -30,6 +29,7 @@ interface LoginState {
 }
 
 export default function SignIn() {
+
   const captchaRef = React.useRef<HCaptcha>(null);
   const [state, setState] = React.useState<LoginState>({
     loading: false,

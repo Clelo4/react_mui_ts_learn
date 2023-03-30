@@ -1,12 +1,8 @@
-import { createTheme, PaletteOptions } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 import colors from 'assets/scss/themes-vars.scss';
 
-interface Customization {
-    borderRadius: number,
-    fontFamily: string,
-    navType: PaletteOptions['mode'],
-}
+import type { CustomizationType } from 'interface/type';
 
 interface ThemeOption {
     colors: typeof colors,
@@ -20,7 +16,7 @@ interface ThemeOption {
     menuSelected: typeof colors.secondaryDark,
     menuSelectedBack: typeof colors.secondaryLight,
     divider: typeof colors.grey200,
-    customization: Customization,
+    customization: CustomizationType,
 }
 
 declare module '@mui/material/styles' {
@@ -36,7 +32,7 @@ function componentStyleOverrides(theme: ThemeOption) {
             styleOverrides: {
                 root: {
                     fontWeight: 500,
-                    borderRadius: '4px'
+                    borderRadius: `${theme.customization.borderRadius}px`
                 }
             }
         },
@@ -415,7 +411,7 @@ function themeTypography(theme: ThemeOption) {
     };
 }
 
-const themeFactory = (customization: Customization) => {
+const themeFactory = (customization: CustomizationType) => {
     const themeOption: ThemeOption = {
         colors,
         heading: colors.grey900,
@@ -428,7 +424,7 @@ const themeFactory = (customization: Customization) => {
         menuSelected: colors.secondaryDark,
         menuSelectedBack: colors.secondaryLight,
         divider: colors.grey200,
-        customization: customization
+        customization,
     };
 
     const themeOptions = {
@@ -449,5 +445,7 @@ const themeFactory = (customization: Customization) => {
 
     return createTheme(themeOptions);
 };
+
+export type ThemeType = ReturnType<typeof themeFactory>;
 
 export default themeFactory;
