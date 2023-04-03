@@ -12,7 +12,7 @@ const Loadable = function<T extends React.ComponentType<any>>(...lazyParameters:
       <Suspense fallback={
         <LinearProgress
           color="primary" 
-          sx={{ 
+          sx={{
             position: 'fixed',
             top: 0,
             left: 0,

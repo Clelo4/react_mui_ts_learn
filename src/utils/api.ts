@@ -1,4 +1,4 @@
-export const login = async(data: any) => {
+export const login = async(data: { email: string, password: string, hcaptchaToken: string }) => {
   return await fetch('/api/authless/user/login', {
     method: 'post',
     headers: {

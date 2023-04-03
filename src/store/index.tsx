@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
 import customizationReducer from './customizationSlice';
+import accountReducer from './account';
 
 const store = configureStore({
   reducer: {
-    customization: customizationReducer
+    customization: customizationReducer,
+    account: accountReducer,
   }
 });
 

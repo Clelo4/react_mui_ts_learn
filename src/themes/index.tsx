@@ -368,7 +368,7 @@ function themeTypography(theme: ThemeOption) {
         mainContent: {
             backgroundColor: theme.background,
             width: '100%',
-            minHeight: 'calc(100vh - 88px)',
+            minHeight: 'calc(100% - 88px)',
             flexGrow: 1,
             padding: '20px',
             marginTop: '88px',
@@ -443,7 +443,8 @@ const themeFactory = (customization: CustomizationType) => {
         components: componentStyleOverrides(themeOption)
     };
 
-    return createTheme(themeOptions);
+    const res = createTheme(themeOptions);
+    return res as typeof res & typeof themeOptions;
 };
 
 export type ThemeType = ReturnType<typeof themeFactory>;

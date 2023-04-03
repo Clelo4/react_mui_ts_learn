@@ -10,7 +10,7 @@ import themeFactory from 'themes';
 import { useAppSelector } from 'store/hooks';
 
 function App() {
-  const customization = useAppSelector((state) => state.customization)
+  const customization = useAppSelector((state) => state.customization);
 
   const theme = React.useMemo(() => {
     console.log('customization change');

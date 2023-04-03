@@ -1,8 +1,7 @@
 import LazyLoader from 'components/LazyLoader';
 import MinimalLayout from 'layout/MinimalLayout';
 
-const SignIn = LazyLoader(() => import('pages/SignIn'));
-const SignUp = LazyLoader(() => import('pages/SignUp'));
+const SignIn = LazyLoader(() => import('pages/authless/SignIn'));
 
 const AuthenticationRoutes = [{
     path: '/',
@@ -11,10 +10,6 @@ const AuthenticationRoutes = [{
       {
         path: '/signin',
         element: <SignIn />,
-      },
-      {
-        path: '/signup',
-        element: <SignUp />,
       },
     ]
 }];

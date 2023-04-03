@@ -17,9 +17,7 @@ export default class Home extends React.Component<{}> {
 
   render(): React.ReactNode {
     return  (
-      <>
-        <Outlet></Outlet>
-      </>
+      <Outlet></Outlet>
     );
   }
 }
