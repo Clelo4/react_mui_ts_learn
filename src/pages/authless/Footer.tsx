@@ -6,7 +6,6 @@ type Props = React.PropsWithChildren<{
     sx?: SxProps<Theme>;
 }>;
 
-
 function Footer(props: Props) {
   return (
     <Stack direction="row" justifyContent="flex-end" sx={{ ...(props.sx ?? {}) }}>

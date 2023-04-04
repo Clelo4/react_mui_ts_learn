@@ -7,6 +7,7 @@ import { Avatar, Button, TextField,
   Box, Typography, Container, Backdrop,
   CircularProgress
 } from '@mui/material';
+import { useSnackbar } from 'notistack';
 
 import * as api from 'utils/api';
 import { sleep } from 'utils';
@@ -29,6 +30,7 @@ interface LoginState {
 
 export default function SignIn() {
   const theme = useAppTheme();
+  const { enqueueSnackbar } = useSnackbar();
 
   const captchaRef = React.useRef<HCaptcha>(null);
   const [state, setState] = React.useState<LoginState>({
@@ -54,6 +56,8 @@ export default function SignIn() {
 
   async function onSubmit (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+    enqueueSnackbar('网络错误，请稍后再试', { variant: 'success' });
+    if (+new Date() > 0) return;
     try {
       if (!captchaRef.current) throw new Error('网络错误，请稍后再试')
 
