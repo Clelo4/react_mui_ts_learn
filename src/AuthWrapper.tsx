@@ -8,7 +8,6 @@ import { getUser } from 'utils/api';
 import { setAuth } from 'store/account';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 
-
 function AuthWrapper() {
   const account = useAppSelector((state) => state.account);
   const dispath = useAppDispatch();
