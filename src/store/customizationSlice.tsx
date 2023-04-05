@@ -11,19 +11,10 @@ export const customizationSlice = createSlice({
         ...defaultCustomization
     },
     reducers: {
-        setMenuAction: (state, action) => {
+        setLeftDrawerOpened: (state, action) => {
             return {
                 ...state,
-            }
-        },
-        toggleMenuAction: (state, action) => {
-            return {
-                ...state,
-            }
-        },
-        openMenuAction: (state, action) => {
-            return {
-                ...state,
+                opened: action.payload,
             }
         },
         setFontFamilyAction: (state, action) => {
@@ -48,8 +39,7 @@ export const customizationSlice = createSlice({
 });
 
 export const {
-    setMenuAction, toggleMenuAction,
-    openMenuAction, setFontFamilyAction,
+    setLeftDrawerOpened, setFontFamilyAction,
     setOrderRadiusAction, addBorderRadiusAction,
 } = customizationSlice.actions;
 

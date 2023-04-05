@@ -1,111 +1,86 @@
-// import { useDispatch, useSelector } from 'react-redux';
-// import { Outlet } from 'react-router-dom';
 
-// // material-ui
-// import { styled, useTheme } from '@mui/material/styles';
-// import { AppBar, Box, CssBaseline, Toolbar, useMediaQuery } from '@mui/material';
+import { Outlet } from 'react-router-dom';
+import { AppBar as MuiAppBar, Box, Button, Container, CssBaseline, Toolbar, Typography } from '@mui/material';
+import { useState } from 'react';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
-// // project imports
-// import Breadcrumbs from 'ui-component/extended/Breadcrumbs';
-// import Header from './Header';
-// import Sidebar from './Sidebar';
-// import Customization from '../Customization';
-// import navigation from 'menu-items';
-// import { drawerWidth } from 'store/constant';
-// import { SET_MENU } from 'store/actions';
+import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
 
-// // assets
-// import { IconChevronRight } from '@tabler/icons';
+import { useAppTheme } from 'themes/hooks';
+import { useAppDispatch, useAppSelector } from 'store/hooks';
+import Sidebar from './Sidebar';
+import styled from 'utils/styled';
+import { drawerWidth } from 'config';
 
-// // styles
-// const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
-//     ...theme.typography.mainContent,
-//     ...(!open && {
-//         borderBottomLeftRadius: 0,
-//         borderBottomRightRadius: 0,
-//         transition: theme.transitions.create('margin', {
-//             easing: theme.transitions.easing.sharp,
-//             duration: theme.transitions.duration.leavingScreen
-//         }),
-//         [theme.breakpoints.up('md')]: {
-//             marginLeft: -(drawerWidth - 20),
-//             width: `calc(100% - ${drawerWidth}px)`
-//         },
-//         [theme.breakpoints.down('md')]: {
-//             marginLeft: '20px',
-//             width: `calc(100% - ${drawerWidth}px)`,
-//             padding: '16px'
-//         },
-//         [theme.breakpoints.down('sm')]: {
-//             marginLeft: '10px',
-//             width: `calc(100% - ${drawerWidth}px)`,
-//             padding: '16px',
-//             marginRight: '10px'
-//         }
-//     }),
-//     ...(open && {
-//         transition: theme.transitions.create('margin', {
-//             easing: theme.transitions.easing.easeOut,
-//             duration: theme.transitions.duration.enteringScreen
-//         }),
-//         marginLeft: 0,
-//         borderBottomLeftRadius: 0,
-//         borderBottomRightRadius: 0,
-//         width: `calc(100% - ${drawerWidth}px)`,
-//         [theme.breakpoints.down('md')]: {
-//             marginLeft: '20px'
-//         },
-//         [theme.breakpoints.down('sm')]: {
-//             marginLeft: '10px'
-//         }
-//     })
-// }));
+interface AppBarProps extends MuiAppBarProps {
+    open?: boolean,
+}
 
-// // ==============================|| MAIN LAYOUT ||============================== //
+const Main = styled('main')(({ theme }) => {
+    return {
+        ...theme.typography.mainContent
+    };
+});
 
-// const MainLayout = () => {
-//     const theme = useTheme();
-//     const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
-//     // Handle left drawer
-//     const leftDrawerOpened = useSelector((state) => state.customization.opened);
-//     const dispatch = useDispatch();
-//     const handleLeftDrawerToggle = () => {
-//         dispatch({ type: SET_MENU, opened: !leftDrawerOpened });
-//     };
+const AppBar = styled(MuiAppBar, {  shouldForwardProp: (prop) => prop !== 'open', })<AppBarProps>(
+    ({ theme, open }) => {
+        return {
+            width: '100%',
+            bgcolor: theme.palette.background.default,
+        };
+    });
 
-//     return (
-//         <Box sx={{ display: 'flex' }}>
-//             <CssBaseline />
-//             {/* header */}
-//             <AppBar
-//                 enableColorOnDark
-//                 position="fixed"
-//                 color="inherit"
-//                 elevation={0}
-//                 sx={{
-//                     bgcolor: theme.palette.background.default,
-//                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
-//                 }}
-//             >
-//                 <Toolbar>
-//                     <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
-//                 </Toolbar>
-//             </AppBar>
+const MainLayout = () => {
+    const theme = useAppTheme();
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const dispatch = useAppDispatch();
 
-//             {/* drawer */}
-//             <Sidebar drawerOpen={!matchDownMd ? leftDrawerOpened : !leftDrawerOpened} drawerToggle={handleLeftDrawerToggle} />
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <CssBaseline />
+            <AppBar
+                enableColorOnDark
+                position="fixed"
+                color="inherit"
+                elevation={0}
+                open={drawerOpen}
+            >
+                <Toolbar>
+                    <IconButton
+                        color="inherit"
+                        aria-label="open drawer"
+                        onClick={() => { setDrawerOpen(!drawerOpen); }}
+                        edge="start"
+                    >
+                        <MenuIcon sx={{ fontSize: '32px' }} />
+                    </IconButton>
+                    <Typography variant="h4" noWrap component="div" sx={{ marginLeft: '12px', }}>
+                        Persistent drawer
+                    </Typography>
+                </Toolbar>
+            </AppBar>
 
-//             {/* main content */}
-//             <Main theme={theme} open={leftDrawerOpened}>
-//                 {/* breadcrumb */}
-//                 <Breadcrumbs separator={IconChevronRight} navigation={navigation} icon title rightAlign />
-//                 <Outlet />
-//             </Main>
-//             <Customization />
-//         </Box>
-//     );
-// };
+            <Box component='div' sx={{
+                width: '100%',
+                display: 'flex',                
+                minHeight: 'calc(100vh - 88px)',
+                marginTop: '88px',
+            }}>
+                <Sidebar open={drawerOpen} onClose={() => { setDrawerOpen(false); }}/>   
+                <Main sx={{
+                    flexGrow: 1,
+                    margin: '0 16px 16px 16px', 
+                    height: 'calc(100% - 16px)',
+                    width: '100%',
+                    padding: '20px'
+                 }}>
+                    <Outlet></Outlet>
+                </Main>
+            </Box>
+        </Box>
+    );
+};
 
-// export default MainLayout;
+export default MainLayout;
 
-export {}

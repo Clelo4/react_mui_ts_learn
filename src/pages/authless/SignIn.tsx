@@ -11,11 +11,11 @@ import { useSnackbar } from 'notistack';
 
 import * as api from 'utils/api';
 import { sleep } from 'utils';
-import Notice from 'components/Notice';
 import MainCardWrapper from './MainCardWrapper';
 import { useAppTheme } from 'themes/hooks';
-
-import type { NoticePropsType } from 'components/Notice';
+import { useAppDispatch } from 'store/hooks';
+import { setAuth } from 'store/account';
+import { AuthStateType } from 'enum';
 
 interface LoginState {
   loading: boolean,
@@ -23,14 +23,12 @@ interface LoginState {
     email: string | null,
     password: string | null,
   },
-  showNotice: boolean,
-  noticeMessage: string,
-  noticeType?: NoticePropsType['type']
 }
 
 export default function SignIn() {
   const theme = useAppTheme();
   const { enqueueSnackbar } = useSnackbar();
+  const dispath = useAppDispatch();
 
   const captchaRef = React.useRef<HCaptcha>(null);
   const [state, setState] = React.useState<LoginState>({
@@ -39,25 +37,11 @@ export default function SignIn() {
       email: null,
       password: null,
     },
-    showNotice: false,
-    noticeMessage: '',
-    noticeType: 'error',
   });
-  const navigate = useNavigate();
-
-  async function handleVerificationSuccess(...formData: Parameters<typeof api.login>) {
-    const res = await api.login(...formData);
-    if (res.code !== 0) throw new Error(res.message);
-
-    setState((preState) => ({ ...preState, noticeMessage: res.message || '登录成功', showNotice: true, noticeType: 'success', loading: true, }));
-    await sleep(1000);
-    navigate('/');
-  }
 
   async function onSubmit (event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    enqueueSnackbar('网络错误，请稍后再试', { variant: 'success' });
-    if (+new Date() > 0) return;
+
     try {
       if (!captchaRef.current) throw new Error('网络错误，请稍后再试')
 
@@ -73,12 +57,17 @@ export default function SignIn() {
 
       const res = await captchaRef.current.execute({ async: true });
       if (!res) throw new Error('网络错误，请稍后再试');
+      const { response: token } = res;
 
-      const { response } = res;
-      await handleVerificationSuccess({ email, password, hcaptchaToken: response });
+      const loginRes = await api.login({ email, password, hcaptchaToken: token });
+      if (loginRes.code !== 0) throw new Error(loginRes.message);
+  
+      enqueueSnackbar(loginRes.message || '登录成功', { variant: 'success' });
+      await sleep(1000);
+      dispath(setAuth(AuthStateType.LOGINED));
     } catch (error) {
       console.log(error);
-      setState((preState) => ({ ...preState, noticeMessage: String(error), showNotice: true, noticeType: 'error' }));
+      enqueueSnackbar(String(error), { variant: 'error' });
     } finally {
       setState((preState) => ({ ...preState, loading: false }));
     }
@@ -86,12 +75,6 @@ export default function SignIn() {
   
   return (
     <MainCardWrapper>
-      <Notice
-        open={state.showNotice}
-        message={state.noticeMessage}
-        onClose={() => { setState((preState) => ({ ...preState, showNotice: false, noticeMessage: '' })) }}
-        type={state.noticeType}
-      ></Notice>
       <Container component="main" maxWidth="xs" sx={{ padding: '30px 20px' }}>
         <Box
           sx={{
@@ -141,7 +124,7 @@ export default function SignIn() {
               <Grid item xs>
                 <Typography
                   component={Link}
-                  to="/account"
+                  to="/home"
                   variant="subtitle1"
                   sx={{ textDecoration: 'none', color: '#1976d2', ":hover": { color: '#08437c' } }}
                 >

@@ -1,23 +1,12 @@
-import { } from "@mui/material";
-import React from "react";
-import {
-  Outlet,
-} from 'react-router-dom';
-import { logout } from "../utils/api";
+import { Button, Link } from "@mui/material";
+import { useNavigate } from "react-router";
 
-export default class Home extends React.Component<{}> {
-  constructor(props: {}) {
-    super(props);
-    this.logout = this.logout.bind(this);
-  }
-
-  async logout() {
-    await logout();
-  }
-
-  render(): React.ReactNode {
-    return  (
-      <Outlet></Outlet>
-    );
-  }
+export default function Home() {
+  const navigate = useNavigate();
+  return  (
+    <div>
+      <Link href="/signin">signin</Link>
+      <Button onClick={() => { navigate('/signin'); }}>navigate signin</Button>
+    </div>
+  );
 }

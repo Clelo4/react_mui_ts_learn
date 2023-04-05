@@ -1,4 +1,5 @@
 import { createTheme } from '@mui/material/styles';
+import type { Direction } from '@mui/material/styles';
 
 import colors from 'assets/scss/themes-vars.scss';
 
@@ -17,12 +18,6 @@ interface ThemeOption {
     menuSelectedBack: typeof colors.secondaryLight,
     divider: typeof colors.grey200,
     customization: CustomizationType,
-}
-
-declare module '@mui/material/styles' {
-    interface ThemeOptions {
-        direction: 'ltr',
-    }
 }
 
 function componentStyleOverrides(theme: ThemeOption) {
@@ -367,12 +362,6 @@ function themeTypography(theme: ThemeOption) {
         },
         mainContent: {
             backgroundColor: theme.background,
-            width: '100%',
-            minHeight: 'calc(100% - 88px)',
-            flexGrow: 1,
-            padding: '20px',
-            marginTop: '88px',
-            marginRight: '20px',
             borderRadius: `${theme.customization.borderRadius}px`
         },
         menuCaption: {
@@ -428,7 +417,7 @@ const themeFactory = (customization: CustomizationType) => {
     };
 
     const themeOptions = {
-        direction: 'ltr' as 'ltr',
+        direction: 'ltr' as "ltr",
         palette: themePalette(themeOption),
         mixins: {
             toolbar: {
@@ -444,7 +433,7 @@ const themeFactory = (customization: CustomizationType) => {
     };
 
     const res = createTheme(themeOptions);
-    return res as typeof res & typeof themeOptions;
+    return res as (typeof res & typeof themeOptions);
 };
 
 export type ThemeType = ReturnType<typeof themeFactory>;

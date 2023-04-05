@@ -5,3 +5,5 @@ export const defaultCustomization: CustomizationType = {
   borderRadius: 20,
   navType: 'light',
 };
+
+export const drawerWidth = 220;

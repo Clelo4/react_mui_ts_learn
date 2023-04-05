@@ -1,17 +1,20 @@
-import ErrorPage from 'pages/errorPage';
 import Home from 'pages/Home';
 import Account from 'pages/Account';
+import MainLayout from 'components/MainLayout';
 
 const MainRoutes = [
   {
     path: '/',
-    element: <Home />,
-    errorElement: <ErrorPage />,
+    element: <MainLayout />,
     children: [
       {
-        path: 'account',
+        path: '/account',
         element: <Account />,
-      }
+      },
+      {
+        path: '/home',
+        element: <Home />,
+      },
     ],
   },
 ];

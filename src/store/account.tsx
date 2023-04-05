@@ -5,7 +5,7 @@ import { AuthStateType } from '../enum';
 export const accountSlice = createSlice({
   name: 'account',
   initialState: {
-    isAuth: AuthStateType.NEED_LOGIN,
+    isAuth: AuthStateType.INITIAL,
   },
   reducers: {
     setAuth: (state, action) => {

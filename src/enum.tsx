@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 export enum AuthStateType {
-  NEED_LOGIN = 0,
-  LOGINED = 1,
+  INITIAL = 0,
+  NEED_LOGIN = 1,
+  LOGINED = 2,
 }
