@@ -33,7 +33,7 @@ const AppBar = styled(MuiAppBar, {  shouldForwardProp: (prop) => prop !== 'open'
 
 const MainLayout = () => {
     const theme = useAppTheme();
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(true);
     const dispatch = useAppDispatch();
 
     return (

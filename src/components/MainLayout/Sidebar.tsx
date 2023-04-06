@@ -12,12 +12,12 @@ export default function Sidebar(props: PropsType) {
 
   return (
     <Box component='nav'>
-      {/* <Drawer
+      <Drawer
         variant="persistent"
         anchor="left"
         open={props.open}
         onClose={props.onClose}
-        ModalProps={{ keepMounted: true }}
+        ModalProps={{ keepMounted: false }}
         sx={{
           width: drawerWidth,
           flexShrink: 0,
@@ -28,7 +28,7 @@ export default function Sidebar(props: PropsType) {
         }}
       >
         123
-      </Drawer> */}
+      </Drawer>
     </Box>
   );
 }
