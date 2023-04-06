@@ -2,16 +2,16 @@ import { Box, Drawer, List } from "@mui/material";
 
 import { drawerWidth } from "config";
 import { useAppTheme } from "themes/hooks";
+import MenuList from './MenuList';
 
 interface PropsType {
   open?: boolean,
   onClose: () => void,
 }
 
-function MenuList() {
+function DrawerContent() {
   return (
-    <List>
-    </List>
+    <MenuList />
   );
 }
 
@@ -38,7 +38,7 @@ export default function Sidebar(props: PropsType) {
           },
         }}
       >
-        <MenuList></MenuList>
+        <DrawerContent></DrawerContent>
       </Drawer>
     </Box>
   );

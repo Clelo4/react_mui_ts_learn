@@ -7,3 +7,5 @@ export const defaultCustomization: CustomizationType = {
 };
 
 export const drawerWidth = 220;
+
+export const menuItems: { id: number, type: string }[] = [];
