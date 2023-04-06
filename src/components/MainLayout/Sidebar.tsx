@@ -1,14 +1,22 @@
-import { Box, Drawer } from "@mui/material";
+import { Box, Drawer, List } from "@mui/material";
 
 import { drawerWidth } from "config";
+import { useAppTheme } from "themes/hooks";
 
 interface PropsType {
   open?: boolean,
   onClose: () => void,
 }
 
+function MenuList() {
+  return (
+    <List>
+    </List>
+  );
+}
+
 export default function Sidebar(props: PropsType) {
-  const container = window !== undefined ? () => window.document.body : undefined;
+  const theme = useAppTheme();
 
   return (
     <Box component='nav'>
@@ -19,26 +27,19 @@ export default function Sidebar(props: PropsType) {
         onClose={props.onClose}
         ModalProps={{ keepMounted: false }}
         sx={{
-          width: drawerWidth,
           flexShrink: 0,
           '& .MuiDrawer-paper': {
             width: drawerWidth,
+            background: theme.palette.background.default,
+            color: theme.palette.text.primary,
+            borderRight: 'none',
             boxSizing: 'border-box',
+            top: '88px',
           },
         }}
       >
-        123
+        <MenuList></MenuList>
       </Drawer>
     </Box>
   );
 }
-
-// '& .MuiDrawer-paper': {
-//   width: drawerWidth,
-//   background: theme.palette.background.default,
-//   color: theme.palette.text.primary,
-//   borderRight: 'none',
-//   [theme.breakpoints.up('md')]: {
-//       top: '88px'
-//   }
-// }

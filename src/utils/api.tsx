@@ -23,8 +23,8 @@ export const logout = async() => {
 }
 
 export const getUserInfo = async() => {
-  return await fetch('/api/authless/user/info/get', {
-    method: 'post',
+  return await fetch('/api/authless/user/info', {
+    method: 'get',
   })
   .then((response) => {
     if (!response.ok) throw new Error(response.statusText);

@@ -17,9 +17,22 @@ interface AppBarProps extends MuiAppBarProps {
     open?: boolean,
 }
 
-const Main = styled('main')(({ theme }) => {
+interface MainProps {
+    open?: boolean,
+}
+
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<MainProps>(({ theme, open }) => {
+    const mainPadding = 20;
     return {
-        ...theme.typography.mainContent
+        ...theme.typography.mainContent,
+        margin: '0 16px 16px 16px',
+        minHeight: 'calc(100vh - 104px)',
+        marginTop: '88px',
+        width: '100%',
+        padding: `${mainPadding}px`,
+        ...(open && {
+            width: `calc(100% - ${drawerWidth + mainPadding}px)`,
+        }),
     };
 });
 
@@ -33,11 +46,11 @@ const AppBar = styled(MuiAppBar, {  shouldForwardProp: (prop) => prop !== 'open'
 
 const MainLayout = () => {
     const theme = useAppTheme();
-    const [drawerOpen, setDrawerOpen] = useState(true);
+    const [drawerOpen, setDrawerOpen] = useState(false);
     const dispatch = useAppDispatch();
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
             <CssBaseline />
             <AppBar
                 enableColorOnDark
@@ -45,6 +58,9 @@ const MainLayout = () => {
                 color="inherit"
                 elevation={0}
                 open={drawerOpen}
+                sx={{
+                    bgcolor: theme.palette.background.default,
+                }}
             >
                 <Toolbar>
                     <IconButton
@@ -61,23 +77,13 @@ const MainLayout = () => {
                 </Toolbar>
             </AppBar>
 
-            <Box component='div' sx={{
-                width: '100%',
-                display: 'flex',                
-                minHeight: 'calc(100vh - 88px)',
-                marginTop: '88px',
-            }}>
-                <Sidebar open={drawerOpen} onClose={() => { setDrawerOpen(false); }}/>   
-                <Main sx={{
-                    flexGrow: 1,
-                    margin: '0 16px 16px 16px', 
-                    height: 'calc(100% - 16px)',
-                    width: '100%',
-                    padding: '20px'
-                 }}>
-                    <Outlet></Outlet>
-                </Main>
-            </Box>
+            <Sidebar open={drawerOpen} onClose={() => { setDrawerOpen(false); }}/>   
+
+            <Main
+                open={drawerOpen}
+            >
+                <Outlet></Outlet>
+            </Main>
         </Box>
     );
 };
