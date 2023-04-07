@@ -1,21 +1,17 @@
-import React from "react";
+import React from 'react';
 
 interface DashboardState {
-  sideOpen: boolean,
+  sideOpen: boolean;
 }
 
 export default class Dashboard extends React.Component<{}, DashboardState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      sideOpen: false,
+      sideOpen: false
     };
   }
   render(): React.ReactNode {
-    return (
-      <>
-        
-      </>
-    );
+    return <></>;
   }
 }

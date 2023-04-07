@@ -1,9 +1,9 @@
 import type { PaletteOptions } from '@mui/material/styles';
 
-type NavType = NonNullable<PaletteOptions['mode']>
+type NavType = NonNullable<PaletteOptions['mode']>;
 
 export interface CustomizationType {
-  borderRadius: number,
-  fontFamily: string,
-  navType: NavType,
+  borderRadius: number;
+  fontFamily: string;
+  navType: NavType;
 }

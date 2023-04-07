@@ -3,15 +3,17 @@ import MinimalLayout from 'layout/MinimalLayout';
 
 const SignIn = LazyLoader(() => import('pages/authless/SignIn'));
 
-const AuthenticationRoutes = [{
+const AuthenticationRoutes = [
+  {
     path: 'signin',
     element: <MinimalLayout />,
     children: [
       {
         path: '',
-        element: <SignIn />,
-      },
+        element: <SignIn />
+      }
     ]
-}];
+  }
+];
 
 export default AuthenticationRoutes;

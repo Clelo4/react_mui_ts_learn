@@ -6,7 +6,7 @@ import { useAppTheme } from 'themes/hooks';
 import type { SxProps, Theme } from '@mui/material/styles';
 
 type Props = React.PropsWithChildren<{
-    sx?: SxProps<Theme>;
+  sx?: SxProps<Theme>;
 }>;
 
 function BackgroundWrapper(props: Props) {
@@ -17,7 +17,7 @@ function BackgroundWrapper(props: Props) {
       sx={{
         backgroundColor: theme.palette.primary.light,
         minHeight: '100vh',
-        ...(props.sx)
+        ...props.sx
       }}
     >
       {props.children}

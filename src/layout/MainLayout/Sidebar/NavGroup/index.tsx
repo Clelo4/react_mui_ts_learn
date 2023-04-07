@@ -1,11 +1,7 @@
-
 interface PropsType {
-  item: any,
+  item: any;
 }
 
 export default function NavGroup(props: PropsType) {
-  return (
-    <></>
-  );
+  return <></>;
 }
-

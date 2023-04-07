@@ -10,18 +10,18 @@ const MainRoutes = [
     children: [
       {
         path: '',
-        element: <Home />,
+        element: <Home />
       },
       {
         path: 'home',
-        element: <Home />,
+        element: <Home />
       },
       {
         path: 'account',
-        element: <Account />,
-      },
-    ],
-  },
+        element: <Account />
+      }
+    ]
+  }
 ];
 
 export default MainRoutes;

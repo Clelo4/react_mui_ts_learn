@@ -5,7 +5,7 @@ import NavGroup from './NavGroup/index';
 export default function MenuList() {
   const navItems = menuItems.map((item) => {
     switch (item.type) {
-      case 'group': 
+      case 'group':
         return <NavGroup key={item.id} item={item} />;
       default:
         return (
@@ -15,7 +15,5 @@ export default function MenuList() {
         );
     }
   });
-  return (
-    <>{ navItems }</>
-  );
+  return <>{navItems}</>;
 }

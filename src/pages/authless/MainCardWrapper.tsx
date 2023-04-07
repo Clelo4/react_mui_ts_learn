@@ -12,18 +12,19 @@ export default function MainCardWrapper(props: React.PropsWithChildren) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        alignItems: "stretch",
-    }}>
-      <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', }}>
+        alignItems: 'stretch'
+      }}
+    >
+      <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <MainCard
           sx={{
-            maxWidth: { xs: 380, lg: 420 },
+            maxWidth: { xs: 380, lg: 420 }
           }}
         >
-          { props.children }
+          {props.children}
         </MainCard>
       </Box>
       <Footer sx={{ flexGrow: 0, margin: '20px' }}></Footer>
     </BackgroundWrapper>
-  )
+  );
 }

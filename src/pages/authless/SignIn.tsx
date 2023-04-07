@@ -1,10 +1,18 @@
 import React from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import HCaptcha from '@hcaptcha/react-hcaptcha';
-import { useNavigate, Link } from "react-router-dom";
-import { Avatar, Button, TextField,
-  FormControlLabel, Checkbox, Grid,
-  Box, Typography, Container, Backdrop,
+import { useNavigate, Link } from 'react-router-dom';
+import {
+  Avatar,
+  Button,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  Grid,
+  Box,
+  Typography,
+  Container,
+  Backdrop,
   CircularProgress
 } from '@mui/material';
 import { useSnackbar } from 'notistack';
@@ -18,11 +26,11 @@ import { setAuth } from 'store/account';
 import { AuthStateType } from 'enum';
 
 interface LoginState {
-  loading: boolean,
+  loading: boolean;
   formData: {
-    email: string | null,
-    password: string | null,
-  },
+    email: string | null;
+    password: string | null;
+  };
 }
 
 export default function SignIn() {
@@ -35,15 +43,15 @@ export default function SignIn() {
     loading: false,
     formData: {
       email: null,
-      password: null,
-    },
+      password: null
+    }
   });
 
-  async function onSubmit (event: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     try {
-      if (!captchaRef.current) throw new Error('网络错误，请稍后再试')
+      if (!captchaRef.current) throw new Error('网络错误，请稍后再试');
 
       const data = new FormData(event.currentTarget);
       const email = data.get('email') as LoginState['formData']['email'];
@@ -52,7 +60,7 @@ export default function SignIn() {
 
       setState((preState) => ({
         ...preState,
-        loading: true,
+        loading: true
       }));
 
       const res = await captchaRef.current.execute({ async: true });
@@ -61,7 +69,7 @@ export default function SignIn() {
 
       const loginRes = await api.login({ email, password, hcaptchaToken: token });
       if (loginRes.code !== 0) throw new Error(loginRes.message);
-  
+
       enqueueSnackbar(loginRes.message || '登录成功', { variant: 'success' });
       await sleep(1000);
       dispath(setAuth(AuthStateType.LOGINED));
@@ -72,7 +80,7 @@ export default function SignIn() {
       setState((preState) => ({ ...preState, loading: false }));
     }
   }
-  
+
   return (
     <MainCardWrapper>
       <Container component="main" maxWidth="xs" sx={{ padding: '30px 20px' }}>
@@ -80,7 +88,7 @@ export default function SignIn() {
           sx={{
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
+            alignItems: 'center'
           }}
         >
           <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -89,7 +97,7 @@ export default function SignIn() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={ onSubmit } sx={{ mt: 1 }} autoComplete="off">
+          <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }} autoComplete="off">
             <TextField
               margin="normal"
               required
@@ -112,12 +120,7 @@ export default function SignIn() {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               Sign In
             </Button>
             <Grid container>
@@ -126,7 +129,7 @@ export default function SignIn() {
                   component={Link}
                   to="/home"
                   variant="subtitle1"
-                  sx={{ textDecoration: 'none', color: '#1976d2', ":hover": { color: '#08437c' } }}
+                  sx={{ textDecoration: 'none', color: '#1976d2', ':hover': { color: '#08437c' } }}
                 >
                   Forgot password?
                 </Typography>
@@ -134,17 +137,17 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        
+
         <Backdrop
           sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open= {state.loading}
+          open={state.loading}
         >
           <CircularProgress color="inherit" />
         </Backdrop>
         <HCaptcha
           sitekey="74092ba4-fd86-467b-8670-579af8ebf2d4"
           ref={captchaRef}
-          size='invisible'
+          size="invisible"
           theme={theme.palette.mode}
           onVerify={() => {}}
         />

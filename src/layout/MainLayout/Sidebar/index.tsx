@@ -1,25 +1,23 @@
-import { Box, Drawer, List } from "@mui/material";
+import { Box, Drawer, List } from '@mui/material';
 
-import { AppBarHeight, drawerWidth } from "config";
-import { useAppTheme } from "themes/hooks";
+import { AppBarHeight, drawerWidth } from 'config';
+import { useAppTheme } from 'themes/hooks';
 import MenuList from './MenuList';
 
 interface PropsType {
-  open?: boolean,
-  onClose: () => void,
+  open?: boolean;
+  onClose: () => void;
 }
 
 function DrawerContent() {
-  return (
-    <MenuList />
-  );
+  return <MenuList />;
 }
 
 export default function Sidebar(props: PropsType) {
   const theme = useAppTheme();
 
   return (
-    <Box component='nav'>
+    <Box component="nav">
       <Drawer
         variant="persistent"
         anchor="left"
@@ -34,8 +32,8 @@ export default function Sidebar(props: PropsType) {
             color: theme.palette.text.primary,
             borderRight: 'none',
             boxSizing: 'border-box',
-            top: `${AppBarHeight}px`,
-          },
+            top: `${AppBarHeight}px`
+          }
         }}
       >
         <DrawerContent></DrawerContent>

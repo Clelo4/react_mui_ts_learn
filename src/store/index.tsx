@@ -8,11 +8,11 @@ const store = configureStore({
   reducer: {
     customization: customizationReducer,
     account: accountReducer,
-    sidebar: sidebarReducer,
+    sidebar: sidebarReducer
   }
 });
 
-export type AppStateType = ReturnType<typeof store.getState>
+export type AppStateType = ReturnType<typeof store.getState>;
 export type AppDispathType = typeof store.dispatch;
 
 export default store;

@@ -22,11 +22,11 @@ function AuthWrapper() {
   useEffect(() => {
     console.log('AuthWrapper useEffect');
     if (account.isAuth === AuthStateType.INITIAL) {
-      getUserInfo().then((res) => {
-        dispath(
-          setAuth(res.code === 0 ? AuthStateType.LOGINED : AuthStateType.NEED_LOGIN)
-        );
-      }).catch();
+      getUserInfo()
+        .then((res) => {
+          dispath(setAuth(res.code === 0 ? AuthStateType.LOGINED : AuthStateType.NEED_LOGIN));
+        })
+        .catch();
     } else if (account.isAuth === AuthStateType.LOGINED) {
       if (location.pathname === '/signin') {
         enqueueSnackbar('已登录，正在为您跳转到账户管理页面', { variant: 'success' });
@@ -36,10 +36,10 @@ function AuthWrapper() {
       if (location.pathname !== '/signin') enqueueSnackbar('请登录', { variant: 'error' });
     }
   }, [dispath, account.isAuth, navigate, location, enqueueSnackbar]);
-  
+
   console.log('AuthWrapper end');
   if (account.isAuth === AuthStateType.NEED_LOGIN && location.pathname !== '/signin') {
-    return <SignIn></SignIn>
+    return <SignIn></SignIn>;
   } else if (
     (account.isAuth === AuthStateType.LOGINED && location.pathname !== '/signin') ||
     (account.isAuth === AuthStateType.NEED_LOGIN && location.pathname === '/signin')
