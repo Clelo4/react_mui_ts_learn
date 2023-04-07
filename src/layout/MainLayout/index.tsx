@@ -12,6 +12,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import Sidebar from './Sidebar';
 import styled from 'utils/styled';
 import { AppBarHeight, drawerWidth } from 'config';
+import { setOpen } from 'store/sidebar';
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean,
@@ -52,8 +53,11 @@ const AppBar = styled(MuiAppBar, {  shouldForwardProp: (prop) => prop !== 'open'
 
 function MainLayout() {
     const theme = useAppTheme();
-    const [drawerOpen, setDrawerOpen] = useState(false);
-    const dispatch = useAppDispatch();
+    const sidebarState = useAppSelector((state) => state.sidebar);
+    const dispath = useAppDispatch();
+    const setDrawerOpen = (isOpen: boolean) => {
+        dispath(setOpen(isOpen));
+    };
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'row-reverse' }}>
@@ -63,17 +67,17 @@ function MainLayout() {
                 position="fixed"
                 color="inherit"
                 elevation={0}
-                open={drawerOpen}
+                open={sidebarState.isOpen}
                 sx={{
                     bgcolor: theme.palette.background.default,
-                    transition: drawerOpen ? theme.transitions.create('width') : 'none'
+                    transition: sidebarState.isOpen ? theme.transitions.create('width') : 'none'
                 }}
             >
                 <Toolbar>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
-                        onClick={() => { setDrawerOpen(!drawerOpen); }}
+                        onClick={() => { setDrawerOpen(!sidebarState.isOpen); }}
                         edge="start"
                     >
                         <MenuIcon sx={{ fontSize: '32px' }} />
@@ -84,10 +88,10 @@ function MainLayout() {
                 </Toolbar>
             </AppBar>
 
-            <Sidebar open={drawerOpen} onClose={() => { setDrawerOpen(false); }}/>   
+            <Sidebar open={sidebarState.isOpen} onClose={() => { setDrawerOpen(false); }}/>   
 
             <Main
-                open={drawerOpen}
+                open={sidebarState.isOpen}
             >
                 <Outlet></Outlet>
             </Main>
@@ -96,4 +100,3 @@ function MainLayout() {
 }
 
 export default MainLayout;
-

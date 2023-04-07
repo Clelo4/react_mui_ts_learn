@@ -6,7 +6,7 @@ export const defaultCustomization: CustomizationType = {
   navType: 'light',
 };
 
-export const drawerWidth = 220;
+export const drawerWidth = 200;
 export const AppBarHeight = 88;
 
 export const menuItems: { id: number, type: string }[] = [];
