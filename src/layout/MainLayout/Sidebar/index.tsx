@@ -1,6 +1,6 @@
 import { Box, Drawer, List } from "@mui/material";
 
-import { drawerWidth } from "config";
+import { AppBarHeight, drawerWidth } from "config";
 import { useAppTheme } from "themes/hooks";
 import MenuList from './MenuList';
 
@@ -34,7 +34,7 @@ export default function Sidebar(props: PropsType) {
             color: theme.palette.text.primary,
             borderRight: 'none',
             boxSizing: 'border-box',
-            top: '88px',
+            top: `${AppBarHeight}px`,
           },
         }}
       >

@@ -7,6 +7,7 @@ export default function Home() {
     <div>
       <Link href="/signin">signin</Link>
       <Button onClick={() => { navigate('/signin'); }}>navigate signin</Button>
+      <Button onClick={() => { navigate('/account'); }}>navigate account</Button>
     </div>
   );
 }

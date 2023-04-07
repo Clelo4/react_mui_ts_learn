@@ -11,7 +11,7 @@ import { useAppTheme } from 'themes/hooks';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
 import Sidebar from './Sidebar';
 import styled from 'utils/styled';
-import { drawerWidth } from 'config';
+import { AppBarHeight, drawerWidth } from 'config';
 
 interface AppBarProps extends MuiAppBarProps {
     open?: boolean,
@@ -23,13 +23,18 @@ interface MainProps {
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<MainProps>(({ theme, open }) => {
     const mainPadding = 20;
+    const margin = 16;
     return {
         ...theme.typography.mainContent,
-        margin: '0 16px 16px 16px',
-        minHeight: 'calc(100vh - 104px)',
-        marginTop: '88px',
+        margin: `0 ${margin}px ${margin}px ${margin}px`,
+        minHeight: `calc(100vh - ${margin + AppBarHeight}px)`,
+        marginTop: `${AppBarHeight}px`,
         width: '100%',
         padding: `${mainPadding}px`,
+        transition: theme.transitions.create('width', {
+            easing: theme.transitions.easing.easeInOut,
+            duration: theme.transitions.duration.standard
+        }),
         ...(open && {
             width: `calc(100% - ${drawerWidth + mainPadding}px)`,
         }),
@@ -41,10 +46,11 @@ const AppBar = styled(MuiAppBar, {  shouldForwardProp: (prop) => prop !== 'open'
         return {
             width: '100%',
             bgcolor: theme.palette.background.default,
+            height: `${AppBarHeight}px`
         };
     });
 
-const MainLayout = () => {
+function MainLayout() {
     const theme = useAppTheme();
     const [drawerOpen, setDrawerOpen] = useState(false);
     const dispatch = useAppDispatch();
@@ -60,6 +66,7 @@ const MainLayout = () => {
                 open={drawerOpen}
                 sx={{
                     bgcolor: theme.palette.background.default,
+                    transition: drawerOpen ? theme.transitions.create('width') : 'none'
                 }}
             >
                 <Toolbar>
@@ -86,7 +93,7 @@ const MainLayout = () => {
             </Main>
         </Box>
     );
-};
+}
 
 export default MainLayout;
 

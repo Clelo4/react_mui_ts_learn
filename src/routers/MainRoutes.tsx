@@ -1,19 +1,24 @@
 import Home from 'pages/Home';
 import Account from 'pages/Account';
-import MainLayout from 'components/MainLayout';
+import MainLayout from 'layout/MainLayout';
+import { redirect } from 'react-router-dom';
 
 const MainRoutes = [
   {
-    path: '/',
+    path: '',
     element: <MainLayout />,
     children: [
       {
-        path: '/account',
-        element: <Account />,
+        path: '',
+        element: <Home />,
       },
       {
-        path: '/home',
+        path: 'home',
         element: <Home />,
+      },
+      {
+        path: 'account',
+        element: <Account />,
       },
     ],
   },
