@@ -1,12 +1,15 @@
-import { Typography } from '@mui/material';
+import { List, Typography } from '@mui/material';
 import { menuItems } from 'config';
-import NavGroup from './NavGroup/index';
+import NavGroup from './NavGroup';
+import NavItem from './NavItem';
 
 export default function MenuList() {
   const navItems = menuItems.map((item) => {
     switch (item.type) {
       case 'group':
         return <NavGroup key={item.id} item={item} />;
+      case 'item':
+        return <NavItem key={item.id} item={item} />;
       default:
         return (
           <Typography key={item.id} variant="h6" color="error" align="center">
@@ -15,5 +18,5 @@ export default function MenuList() {
         );
     }
   });
-  return <>{navItems}</>;
+  return <List>{navItems}</List>;
 }

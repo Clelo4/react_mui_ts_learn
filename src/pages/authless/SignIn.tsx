@@ -24,6 +24,7 @@ import { useAppTheme } from 'themes/hooks';
 import { useAppDispatch } from 'store/hooks';
 import { setAuth } from 'store/account';
 import { AuthStateType } from 'enum';
+import Logo from 'components/Logo';
 
 interface LoginState {
   loading: boolean;
@@ -91,9 +92,9 @@ export default function SignIn() {
             alignItems: 'center'
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <Box>
+            <Logo></Logo>
+          </Box>
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
