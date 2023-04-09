@@ -20,6 +20,7 @@ import Sidebar from './Sidebar';
 import styled from 'utils/styled';
 import { AppBarHeight, drawerWidth } from 'config';
 import { setOpen } from 'store/sidebar';
+import Header from './Header';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -84,19 +85,11 @@ function MainLayout() {
         }}
       >
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={() => {
+          <Header
+            setDrawerOpen={() => {
               setDrawerOpen(!sidebarState.isOpen);
             }}
-            edge="start"
-          >
-            <MenuIcon sx={{ fontSize: '32px' }} />
-          </IconButton>
-          <Typography variant="h4" noWrap component="div" sx={{ marginLeft: '12px' }}>
-            Persistent drawer
-          </Typography>
+          ></Header>
         </Toolbar>
       </AppBar>
 

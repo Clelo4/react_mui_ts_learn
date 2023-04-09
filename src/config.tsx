@@ -2,6 +2,7 @@ import type { CustomizationType } from 'interface/type';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import type { MenuItemType } from 'interface/type';
 import OpenAILogo from 'assets/images/OpenAILogo';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const defaultCustomization: CustomizationType = {
   fontFamily: `'Roboto', sans-serif`,
@@ -28,9 +29,11 @@ export const menuItems: MenuItemType[] = [
     icon: OpenAILogo
   },
   {
-    id: 'other',
-    title: 'other',
+    id: 'account',
+    title: 'Account',
     type: 'item',
+    url: '/account',
+    icon: AccountCircleIcon,
     children: [
       {
         id: 'util-typography',

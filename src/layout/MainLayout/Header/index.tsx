@@ -1,62 +1,38 @@
-// import { useTheme } from '@mui/material/styles';
-// import { Avatar, Box, ButtonBase } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import { Avatar, Box, ButtonBase, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import MenuIcon from '@mui/icons-material/Menu';
 
-// import LogoSection from './LogoSection';
-// import ProfileSection from './ProfileSection';
-// import NotificationSection from './NotificationSection';
+import ProfileSection from './ProfileSection';
+import NotificationSection from './NotificationSection';
+import { useAppTheme } from 'themes/hooks';
 
-// // assets
-// import { IconMenu2 } from '@tabler/icons';
+interface PropsType {
+  setDrawerOpen: () => void;
+}
 
-// const Header = ({ handleLeftDrawerToggle }) => {
-//     const theme = useTheme();
+export default function Header(props: PropsType) {
+  const theme = useAppTheme();
 
-//     return (
-//         <>
-//             {/* logo & toggler button */}
-//             <Box
-//                 sx={{
-//                     width: 228,
-//                     display: 'flex',
-//                     [theme.breakpoints.down('md')]: {
-//                         width: 'auto'
-//                     }
-//                 }}
-//             >
-//                 <Box component="span" sx={{ display: { xs: 'none', md: 'block' }, flexGrow: 1 }}>
-//                     <LogoSection />
-//                 </Box>
-//                 <ButtonBase sx={{ borderRadius: '12px', overflow: 'hidden' }}>
-//                     <Avatar
-//                         variant="rounded"
-//                         sx={{
-//                             ...theme.typography.commonAvatar,
-//                             ...theme.typography.mediumAvatar,
-//                             transition: 'all .2s ease-in-out',
-//                             background: theme.palette.secondary.light,
-//                             color: theme.palette.secondary.dark,
-//                             '&:hover': {
-//                                 background: theme.palette.secondary.dark,
-//                                 color: theme.palette.secondary.light
-//                             }
-//                         }}
-//                         onClick={handleLeftDrawerToggle}
-//                         color="inherit"
-//                     >
-//                         <IconMenu2 stroke={1.5} size="1.3rem" />
-//                     </Avatar>
-//                 </ButtonBase>
-//             </Box>
+  return (
+    <>
+      <IconButton
+        color="inherit"
+        aria-label="open drawer"
+        onClick={props.setDrawerOpen}
+        edge="start"
+      >
+        <MenuIcon sx={{ fontSize: '32px', color: theme.palette.primary.main }} />
+      </IconButton>
+      <Typography variant="h4" noWrap component="div" sx={{ marginLeft: '12px' }}>
+        Persistent drawer
+      </Typography>
 
-//             <Box sx={{ flexGrow: 1 }} />
-//             <Box sx={{ flexGrow: 1 }} />
+      <Box sx={{ flexGrow: 1 }} />
+      <Box sx={{ flexGrow: 1 }} />
 
-//             <NotificationSection />
-//             <ProfileSection />
-//         </>
-//     );
-// };
-
-// export default Header;
-
-export default {};
+      <NotificationSection />
+      <ProfileSection />
+    </>
+  );
+}

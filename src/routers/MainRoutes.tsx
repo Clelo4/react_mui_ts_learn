@@ -1,7 +1,9 @@
-import Home from 'pages/Home';
+import Dashboard from 'pages/Dashboard';
 import Account from 'pages/Account';
 import MainLayout from 'layout/MainLayout';
 import { redirect } from 'react-router-dom';
+import ErrorPage from '../pages/ErrorPage';
+import ChatGPT from 'pages/ChatGPT';
 
 const MainRoutes = [
   {
@@ -10,15 +12,21 @@ const MainRoutes = [
     children: [
       {
         path: '',
-        element: <Home />
+        loader: async () => {
+          return redirect('/dashboard');
+        }
       },
       {
-        path: 'home',
-        element: <Home />
+        path: 'dashboard',
+        element: <Dashboard />
       },
       {
         path: 'account',
         element: <Account />
+      },
+      {
+        path: 'chatGPT',
+        element: <ChatGPT />
       }
     ]
   }

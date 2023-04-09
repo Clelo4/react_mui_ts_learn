@@ -410,8 +410,8 @@ const themeFactory = (customization: CustomizationType) => {
     darkTextPrimary: colors.grey700,
     darkTextSecondary: colors.grey500,
     textDark: colors.grey900,
-    menuSelected: colors.secondaryDark,
-    menuSelectedBack: colors.secondaryLight,
+    menuSelected: colors.primaryMain,
+    menuSelectedBack: colors.primaryLight,
     divider: colors.grey200,
     customization
   };

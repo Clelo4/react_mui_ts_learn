@@ -21,4 +21,5 @@ export interface MenuItemType {
   type: 'group' | 'item' | 'collapse';
   url?: string;
   children?: MenuItemType[];
+  isSelected?: boolean;
 }
