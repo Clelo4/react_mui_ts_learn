@@ -3,10 +3,10 @@ import Snackbar from '@mui/material/Snackbar';
 import Alert, { AlertColor } from '@mui/material/Alert';
 
 export interface NoticePropsType {
-  open: boolean,
-  message: string,
-  onClose: () => void,
-  type?: AlertColor
+  open: boolean;
+  message: string;
+  onClose: () => void;
+  type?: AlertColor;
 }
 
 export default class Notice extends React.Component<NoticePropsType> {
@@ -18,7 +18,9 @@ export default class Notice extends React.Component<NoticePropsType> {
         autoHideDuration={1000}
         onClose={this.props.onClose}
       >
-        <Alert severity={this.props.type} variant="filled" sx={{ minWidth: '20rem' }}>{this.props.message}</Alert>
+        <Alert severity={this.props.type} variant="filled" sx={{ minWidth: '20rem' }}>
+          {this.props.message}
+        </Alert>
       </Snackbar>
     );
   }

@@ -1,0 +1,8 @@
+node_modules/
+*.log
+/logs
+.vscode/
+.github/workflows/_run.sh
+/log
+/build
+/static

@@ -1,9 +1,5 @@
 import { Outlet } from 'react-router-dom';
 
-const MinimalLayout = () => (
-    <>
-        <Outlet />
-    </>
-);
+const MinimalLayout = () => <Outlet />;
 
 export default MinimalLayout;
