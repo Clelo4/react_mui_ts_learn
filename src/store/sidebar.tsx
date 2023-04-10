@@ -6,15 +6,14 @@ export const sidebarSlice = createSlice({
     isOpen: true
   },
   reducers: {
-    setOpen: (state, action) => {
+    revertSidebarStatus: (state) => {
       return {
-        ...state,
-        isOpen: action.payload
+        isOpen: !state.isOpen
       };
     }
   }
 });
 
-export const { setOpen } = sidebarSlice.actions;
+export const { revertSidebarStatus } = sidebarSlice.actions;
 
 export default sidebarSlice.reducer;

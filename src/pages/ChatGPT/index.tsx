@@ -1,5 +1,6 @@
 import { Button, Link } from '@mui/material';
 import { useNavigate } from 'react-router';
+import ReactMarkdown from 'react-markdown';
 
 export default function ChatGPT() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ export default function ChatGPT() {
       >
         navigate account
       </Button>
+      <ReactMarkdown>123</ReactMarkdown>
     </div>
   );
 }

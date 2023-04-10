@@ -24,6 +24,7 @@ import { useAppDispatch, useAppSelector } from 'store/hooks';
 import { useAppTheme } from 'themes/hooks';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import type { MenuItemType } from 'interface/type';
+import { revertSidebarStatus } from 'store/sidebar';
 
 interface PropsType {
   item: MenuItemType;
@@ -32,9 +33,9 @@ interface PropsType {
 function NavItem({ item }: PropsType) {
   const theme = useAppTheme();
   const navigate = useNavigate();
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const customization = useAppSelector((state) => state.customization);
-  // const matchesSM = useMediaQuery(theme.breakpoints.down('lg'));
+  const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
 
   const Icon = item.icon ?? FiberManualRecordIcon;
 
@@ -47,7 +48,10 @@ function NavItem({ item }: PropsType) {
         mb: 0.5
       }}
       onClick={() => {
-        if (item.url) navigate(item.url);
+        if (item.url) {
+          navigate(item.url);
+          if (!matchUpMd) dispatch(revertSidebarStatus());
+        }
       }}
     >
       <ListItemIcon sx={{ my: 'auto' }}>

@@ -1,4 +1,4 @@
-import { Box, Drawer, List } from '@mui/material';
+import { Box, Drawer, List, useMediaQuery } from '@mui/material';
 
 import { AppBarHeight, drawerWidth } from 'config';
 import { useAppTheme } from 'themes/hooks';
@@ -9,17 +9,14 @@ interface PropsType {
   onClose: () => void;
 }
 
-function DrawerContent() {
-  return <MenuList />;
-}
-
 export default function Sidebar(props: PropsType) {
   const theme = useAppTheme();
+  const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <Box component="nav">
       <Drawer
-        variant="persistent"
+        variant={matchUpMd ? 'persistent' : 'temporary'}
         anchor="left"
         open={props.open}
         onClose={props.onClose}
@@ -32,11 +29,16 @@ export default function Sidebar(props: PropsType) {
             color: theme.palette.text.primary,
             borderRight: 'none',
             boxSizing: 'border-box',
-            top: `${AppBarHeight}px`
+            [theme.breakpoints.up('md')]: {
+              top: `${AppBarHeight}px`
+            }
           }
         }}
       >
-        <DrawerContent></DrawerContent>
+        <>
+          {matchUpMd || <Box component="div" sx={{ height: `${AppBarHeight}px` }}></Box>}
+          <MenuList />
+        </>
       </Drawer>
     </Box>
   );
