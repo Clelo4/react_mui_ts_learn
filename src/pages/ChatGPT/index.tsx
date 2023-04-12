@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import Chat from './Chat';
 import TopBar from './TopBar';
+import { useState } from 'react';
 
 const borderRadius = '12px';
 const marginSize = '20px';
@@ -14,16 +15,17 @@ const contentBgColor = 'white';
 
 export default function ChatGPT() {
   const navigate = useNavigate();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   return (
     <Box component="div" sx={{ height: '100%', width: '100%' }}>
       <TopBar
         sx={{
           marginBottom: marginSize,
           borderRadius,
-          height: '56px',
+          height: '50px',
           width: '100%',
           display: 'block',
-          padding: '10px 20px',
+          padding: '7px 20px',
           backgroundColor: contentBgColor
         }}
       ></TopBar>
@@ -39,12 +41,11 @@ export default function ChatGPT() {
         <Sidebar
           sx={{
             borderRadius,
-            height: '100%',
-            marginRight: marginSize,
-            backgroundColor: contentBgColor,
-            width: '300px',
-            boxSizing: 'border-box',
             padding: paddingSize
+          }}
+          open={sidebarOpen}
+          onClose={() => {
+            setSidebarOpen(false);
           }}
         ></Sidebar>
         <Box
@@ -59,7 +60,12 @@ export default function ChatGPT() {
             flexDirection: 'column'
           }}
         >
-          <Header sx={{ height: '78px' }}></Header>
+          <Header
+            sx={{ height: '58px' }}
+            onClickMenu={() => {
+              setSidebarOpen(!sidebarOpen);
+            }}
+          ></Header>
           <Divider></Divider>
           <Chat></Chat>
         </Box>
