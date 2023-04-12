@@ -6,6 +6,7 @@
     "build:scss:type": "yarn typed-scss-modules ./src/assets/scss",
     "start": "DANGEROUSLY_DISABLE_HOST_CHECK=true react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint ./src --ext js,ts,mjs,cjs,tsx",

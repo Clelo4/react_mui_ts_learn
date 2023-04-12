@@ -13,4 +13,4 @@ set -o pipefail
 
 yarn install --production=false
 yarn build:scss:type
-yarn build
+yarn build:prod
