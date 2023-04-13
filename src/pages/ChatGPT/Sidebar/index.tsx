@@ -1,4 +1,5 @@
 import { Drawer, SxProps, useMediaQuery } from '@mui/material';
+import zIndex from '@mui/material/styles/zIndex';
 import { Box } from '@mui/system';
 import { useState } from 'react';
 import { useAppSelector } from 'store/hooks';
@@ -50,7 +51,8 @@ export default function Sidebar(props: { sx?: SxProps; open: boolean; onClose: (
             borderTopLeftRadius: customization.borderRadius,
             borderTopRightRadius: customization.borderRadius,
             padding: '10px'
-          }
+          },
+          zIndex: 10000
         }}
       >
         {content}

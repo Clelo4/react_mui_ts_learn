@@ -8,7 +8,6 @@ import Chat from './Chat';
 import TopBar from './TopBar';
 import { useState } from 'react';
 import { useAppTheme } from 'themes/hooks';
-import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 
 const borderRadius = '12px';
 const marginSize = 20;
@@ -17,17 +16,34 @@ const contentBgColor = 'white';
 const sidebarSize = 220;
 
 export default function ChatGPT() {
-  const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-
   const theme = useAppTheme();
   const isUpMd = useMediaQuery(theme.breakpoints.up('md'));
+  const [isFullScreen, setFullScreen] = useState(false);
 
   const sidebarOverflowSize = isUpMd && sidebarOpen ? sidebarSize + marginSize : 0;
-  const chatFullScreenHandle = useFullScreenHandle();
 
   return (
-    <Box component="div" sx={{ height: '100%', width: '100%', position: 'relative' }}>
+    <Box
+      component="div"
+      sx={{
+        height: '100%',
+        width: '100%',
+        position: 'relative',
+        ...theme.typography.mainContent,
+        ...(isFullScreen
+          ? {
+              position: 'fixed',
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0,
+              zIndex: 10000 - 1,
+              padding: paddingSize
+            }
+          : {})
+      }}
+    >
       <TopBar
         sx={{
           marginBottom: `${marginSize}px`,
@@ -77,23 +93,26 @@ export default function ChatGPT() {
             flexDirection: 'column'
           }}
         >
-          <FullScreen handle={chatFullScreenHandle}>
-            <Header
-              sx={{ height: '58px', backgroundColor: contentBgColor }}
-              onClickMenu={() => {
-                setSidebarOpen(!sidebarOpen);
-              }}
-              fullScreenEnter={chatFullScreenHandle.enter}
-              fullScreenExit={chatFullScreenHandle.exit}
-              isFullScreen={chatFullScreenHandle.active}
-            ></Header>
-            <Divider></Divider>
-            <Chat
-              sx={{
-                backgroundColor: contentBgColor
-              }}
-            ></Chat>
-          </FullScreen>
+          <Header
+            sx={{ height: '58px', backgroundColor: contentBgColor }}
+            onClickMenu={() => {
+              setSidebarOpen(!sidebarOpen);
+            }}
+            fullScreenEnter={() => {
+              setFullScreen(true);
+            }}
+            fullScreenExit={() => {
+              setFullScreen(false);
+            }}
+            isFullScreen={isFullScreen}
+          ></Header>
+          <Divider></Divider>
+          <Chat
+            sx={{
+              backgroundColor: contentBgColor,
+              flexGrow: 1
+            }}
+          ></Chat>
         </Box>
       </Box>
     </Box>
