@@ -1,29 +1,76 @@
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { Avatar, Box, IconButton, SxProps } from '@mui/material';
 import OpenAILogo from 'assets/images/OpenAILogo';
+import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
+import ZoomInMapIcon from '@mui/icons-material/ZoomInMap';
 
-export default function Header(props: { sx?: SxProps; onClickMenu: () => void }) {
+interface PropsType {
+  sx?: SxProps;
+  onClickMenu: () => void;
+  fullScreenEnter: () => void;
+  fullScreenExit: () => void;
+  isFullScreen: boolean;
+}
+
+const headerPaddingSize = '20px';
+
+export default function Header(props: PropsType) {
   return (
     <Box
       component="div"
       sx={{
         ...(props.sx || {}),
         display: 'flex',
-        alignItems: 'center'
+        alignItems: 'center',
+        justifyContent: 'space-between'
       }}
     >
-      <IconButton
-        color="inherit"
-        aria-label="open drawer"
-        edge="start"
-        sx={{ marginLeft: '20px' }}
-        onClick={props.onClickMenu}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          marginLeft: headerPaddingSize
+        }}
       >
-        <MenuIcon></MenuIcon>
-      </IconButton>
-      <Avatar sx={{ background: 'none', marginLeft: '5px' }}>
-        <OpenAILogo sx={{ height: '32px', width: '32px' }}></OpenAILogo>
-      </Avatar>
+        <IconButton
+          color="inherit"
+          aria-label="open drawer"
+          edge="start"
+          onClick={props.onClickMenu}
+        >
+          <MenuIcon></MenuIcon>
+        </IconButton>
+        <Avatar sx={{ background: 'none', marginLeft: '5px' }}>
+          <OpenAILogo sx={{ height: '32px', width: '32px' }}></OpenAILogo>
+        </Avatar>
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          marginRight: headerPaddingSize
+        }}
+      >
+        {props.isFullScreen ? (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={props.fullScreenExit}
+          >
+            <ZoomInMapIcon></ZoomInMapIcon>
+          </IconButton>
+        ) : (
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={props.fullScreenEnter}
+          >
+            <ZoomOutMapIcon></ZoomOutMapIcon>
+          </IconButton>
+        )}
+      </Box>
     </Box>
   );
 }

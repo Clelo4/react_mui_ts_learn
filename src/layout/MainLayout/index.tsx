@@ -47,8 +47,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<Ma
         easing: theme.transitions.easing.easeInOut,
         duration: theme.transitions.duration.standard
       }),
+      boxSizing: 'border-box',
       ...(open && {
-        width: `calc(100% - ${(matchUpMd ? drawerWidth : 0) + mainPadding}px)`
+        width: `calc(100% - ${(matchUpMd ? drawerWidth : 0) + margin * 2}px)`
       })
     };
   }
