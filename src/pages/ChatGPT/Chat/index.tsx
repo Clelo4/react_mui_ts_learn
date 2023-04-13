@@ -5,7 +5,7 @@ export default function Chat(props: { sx?: SxProps }) {
     <Box
       component="div"
       sx={{
-        ...(props.sx || {})
+        ...(props.sx ?? {})
       }}
     ></Box>
   );
