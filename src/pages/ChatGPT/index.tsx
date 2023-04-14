@@ -39,7 +39,8 @@ export default function ChatGPT() {
               top: 0,
               bottom: 0,
               zIndex: 10000 - 1,
-              padding: paddingSize
+              padding: paddingSize,
+              borderRadius: 0
             }
           : {})
       }}
@@ -112,6 +113,7 @@ export default function ChatGPT() {
               backgroundColor: contentBgColor,
               flexGrow: 1
             }}
+            chatId={1}
           ></Chat>
         </Box>
       </Box>
