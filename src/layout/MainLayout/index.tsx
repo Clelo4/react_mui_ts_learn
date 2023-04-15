@@ -37,9 +37,9 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<Ma
     const margin = 16;
     const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
     return {
-      ...theme.typography.mainContent,
+      boxSizing: 'border-box',
       margin: `0 ${margin}px ${margin}px ${margin}px`,
-      minHeight: `calc(100vh - ${margin + AppBarHeight}px)`,
+      height: `calc(100vh - ${margin + AppBarHeight}px)`,
       marginTop: `${AppBarHeight}px`,
       width: '100%',
       padding: `${mainPadding}px`,
@@ -47,10 +47,10 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<Ma
         easing: theme.transitions.easing.easeInOut,
         duration: theme.transitions.duration.standard
       }),
-      boxSizing: 'border-box',
       ...(open && {
         width: `calc(100% - ${(matchUpMd ? drawerWidth : 0) + margin * 2}px)`
-      })
+      }),
+      ...theme.typography.mainContent,
     };
   }
 );

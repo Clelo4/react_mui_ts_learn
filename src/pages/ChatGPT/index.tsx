@@ -29,92 +29,109 @@ export default function ChatGPT() {
       sx={{
         height: '100%',
         width: '100%',
-        position: 'relative',
-        ...theme.typography.mainContent,
-        ...(isFullScreen
-          ? {
-              position: 'fixed',
-              left: 0,
-              right: 0,
-              top: 0,
-              bottom: 0,
-              zIndex: 10000 - 1,
-              padding: paddingSize,
-              borderRadius: 0
-            }
-          : {})
+        ...theme.typography.mainContent
       }}
     >
       <TopBar
         sx={{
-          marginBottom: `${marginSize}px`,
-          borderRadius,
           height: '50px',
           width: '100%',
-          display: 'block',
+          marginBottom: `${marginSize}px`,
           padding: '7px 20px',
+          borderRadius,
           backgroundColor: contentBgColor
         }}
       ></TopBar>
       <Box
         component="div"
         sx={{
-          position: 'relative',
-          left: `-${sidebarOverflowSize}px`,
-          display: 'flex',
           minHeight: '500px',
-          height: 'calc(100% - 76px)',
-          width: `calc(100% + ${sidebarOverflowSize}px)`,
-          transition: theme.transitions.create(['left', 'width'], {
-            duration: theme.transitions.duration.standard
-          })
+          height: 'calc(100% - 70px)',
+          width: '100%',
+          ...(isFullScreen
+            ? {
+                position: 'fixed',
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0,
+                zIndex: 10000 - 1,
+                padding: isUpMd ? paddingSize : 0,
+                borderRadius: 0,
+                backgroundColor: theme.palette.primary.light,
+                height: '100%'
+              }
+            : {})
         }}
       >
-        <Sidebar
-          sx={{
-            width: `${sidebarSize}px`,
-            borderRadius,
-            padding: paddingSize,
-            marginRight: `${marginSize}px`
-          }}
-          open={sidebarOpen}
-          onClose={() => {
-            setSidebarOpen(false);
-          }}
-        ></Sidebar>
         <Box
           component="div"
           sx={{
-            flexGrow: 1,
+            position: 'relative',
+            left: `-${sidebarOverflowSize}px`,
             display: 'flex',
             height: '100%',
-            backgroundColor: contentBgColor,
-            borderRadius,
-            overflow: 'hidden',
-            flexDirection: 'column'
+            width: `calc(100% + ${sidebarOverflowSize}px)`,
+            transition: theme.transitions.create(['left', 'width'], {
+              duration: theme.transitions.duration.standard
+            })
           }}
         >
-          <Header
-            sx={{ height: '58px', backgroundColor: contentBgColor }}
-            onClickMenu={() => {
-              setSidebarOpen(!sidebarOpen);
-            }}
-            fullScreenEnter={() => {
-              setFullScreen(true);
-            }}
-            fullScreenExit={() => {
-              setFullScreen(false);
-            }}
-            isFullScreen={isFullScreen}
-          ></Header>
-          <Divider></Divider>
-          <Chat
+          <Sidebar
             sx={{
-              backgroundColor: contentBgColor,
-              flexGrow: 1
+              width: `${sidebarSize}px`,
+              borderRadius,
+              padding: paddingSize,
+              marginRight: `${marginSize}px`,
+              flexShrink: 0
             }}
-            chatId={1}
-          ></Chat>
+            open={sidebarOpen}
+            onClose={() => {
+              setSidebarOpen(false);
+            }}
+          ></Sidebar>
+          <Box
+            component="div"
+            sx={{
+              flexGrow: 1,
+              display: 'flex',
+              height: '100%',
+              backgroundColor: contentBgColor,
+              overflow: 'hidden',
+              flexDirection: 'column',
+              ...(isFullScreen && !isUpMd ? {} : { borderRadius })
+            }}
+          >
+            <Header
+              sx={{
+                backgroundColor: contentBgColor,
+                boxSizing: 'border-box',
+                padding: '0 24px',
+        height: '68px',
+        flexShrink: 0,
+              }}
+              onClickMenu={() => {
+                setSidebarOpen(!sidebarOpen);
+              }}
+              fullScreenEnter={() => {
+                setFullScreen(true);
+              }}
+              fullScreenExit={() => {
+                setFullScreen(false);
+              }}
+              isFullScreen={isFullScreen}
+            ></Header>
+            <Divider></Divider>
+            <Chat
+              sx={{
+                backgroundColor: contentBgColor,
+                flexGrow: 1,
+                boxSizing: 'border-box',
+                padding: '0 24px'
+              }}
+              chatId={1}
+            ></Chat>
+          </Box>
         </Box>
       </Box>
     </Box>

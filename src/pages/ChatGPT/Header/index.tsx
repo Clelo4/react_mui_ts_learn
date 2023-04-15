@@ -12,8 +12,6 @@ interface PropsType {
   isFullScreen: boolean;
 }
 
-const headerPaddingSize = '20px';
-
 export default function Header(props: PropsType) {
   return (
     <Box
@@ -22,22 +20,16 @@ export default function Header(props: PropsType) {
         ...(props.sx || {}),
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
+        justifyContent: 'space-between',
       }}
     >
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          marginLeft: headerPaddingSize
+          alignItems: 'center'
         }}
       >
-        <IconButton
-          color="inherit"
-          aria-label="open drawer"
-          edge="start"
-          onClick={props.onClickMenu}
-        >
+        <IconButton color="inherit" aria-label="open drawer" onClick={props.onClickMenu}>
           <MenuIcon></MenuIcon>
         </IconButton>
         <Avatar sx={{ background: 'none', marginLeft: '5px' }}>
@@ -47,8 +39,7 @@ export default function Header(props: PropsType) {
       <Box
         sx={{
           display: 'flex',
-          alignItems: 'center',
-          marginRight: headerPaddingSize
+          alignItems: 'center'
         }}
       >
         {props.isFullScreen ? (
