@@ -45,7 +45,6 @@ export default function ChatGPT() {
       <Box
         component="div"
         sx={{
-          minHeight: '500px',
           height: 'calc(100% - 70px)',
           width: '100%',
           ...(isFullScreen
@@ -99,7 +98,9 @@ export default function ChatGPT() {
               backgroundColor: contentBgColor,
               overflow: 'hidden',
               flexDirection: 'column',
-              ...(isFullScreen && !isUpMd ? {} : { borderRadius })
+              ...(isFullScreen && !isUpMd ? {} : { borderRadius }),
+
+              position: 'relative'
             }}
           >
             <Header
@@ -107,8 +108,8 @@ export default function ChatGPT() {
                 backgroundColor: contentBgColor,
                 boxSizing: 'border-box',
                 padding: '0 24px',
-        height: '68px',
-        flexShrink: 0,
+                height: '58px',
+                flexShrink: 0
               }}
               onClickMenu={() => {
                 setSidebarOpen(!sidebarOpen);
@@ -127,7 +128,7 @@ export default function ChatGPT() {
                 backgroundColor: contentBgColor,
                 flexGrow: 1,
                 boxSizing: 'border-box',
-                padding: '0 24px'
+                height: 'calc(100% - 59px)'
               }}
               chatId={1}
             ></Chat>

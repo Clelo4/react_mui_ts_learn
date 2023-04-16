@@ -23,7 +23,7 @@ import MainCardWrapper from './MainCardWrapper';
 import { useAppTheme } from 'themes/hooks';
 import { useAppDispatch } from 'store/hooks';
 import { setAuth } from 'store/account';
-import { AuthStateType } from 'enum';
+import { AuthStateType } from 'interface/enum';
 import Logo from 'components/Logo';
 
 interface LoginState {
