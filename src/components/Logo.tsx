@@ -6,9 +6,15 @@
  *
  */
 
+import { Box, SxProps, Typography } from "@mui/material";
+
 // ==============================|| LOGO SVG ||============================== //
 
-const Logo = () => {
+interface PropsType {
+  sx?: SxProps
+}
+
+export default function Logo(props: PropsType) {
   return (
     /**
      * if you want to use image instead of svg uncomment following, and comment out <svg> element.
@@ -16,8 +22,8 @@ const Logo = () => {
      * <img src={logo} alt="Berry" width="100" />
      *
      */
-    <></>
+    <>
+      <Typography sx={{ fontSize: '24px', fontWeight: 500, fontStyle: 'italic', ...(props.sx ?? {}) }}>CHENGJUNJIE</Typography>
+    </>
   );
-};
-
-export default Logo;
+}

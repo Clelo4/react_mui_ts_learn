@@ -22,6 +22,7 @@ import styled from 'utils/styled';
 import { AppBarHeight, drawerWidth } from 'config';
 import { revertSidebarStatus } from 'store/sidebar';
 import Header from './Header';
+import LogoSection from './LogoSection';
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean;
@@ -89,6 +90,9 @@ function MainLayout() {
         }}
       >
         <Toolbar>
+          <Box component={"div"} sx={{ width: '180px' }}>
+            <LogoSection></LogoSection>
+          </Box>
           <Header setDrawerOpen={revertSidebarStatusCb}></Header>
         </Toolbar>
       </AppBar>

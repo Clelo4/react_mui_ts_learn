@@ -32,7 +32,7 @@ export default function Msg(props: MsgType) {
       <Box
         component="div"
         sx={{
-          maxWidth: '100%',
+          maxWidth: '80%',
           backgroundColor: theme.palette.primary.light,
           borderRadius: `${customization.borderRadius}px`,
           minHeight: `${minHeight}px`,

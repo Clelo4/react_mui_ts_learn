@@ -1,7 +1,7 @@
 import { Box, Button, Divider, Link, useMediaQuery } from '@mui/material';
 import { useNavigate } from 'react-router';
 import ReactMarkdown from 'react-markdown';
-import OpenAILogo from 'assets/images/OpenAILogo';
+import OpenAILogo from 'components/OpenAILogo';
 import Sidebar from './Sidebar';
 import Header from './Header';
 import Chat from './Chat';

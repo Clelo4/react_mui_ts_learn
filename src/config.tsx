@@ -1,12 +1,12 @@
 import type { CustomizationType } from 'interface/type';
 import DashboardRoundedIcon from '@mui/icons-material/DashboardRounded';
 import type { MenuItemType } from 'interface/type';
-import OpenAILogo from 'assets/images/OpenAILogo';
+import OpenAILogo from 'components/OpenAILogo';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const defaultCustomization: CustomizationType = {
   fontFamily: `'Roboto', sans-serif`,
-  borderRadius: 20,
+  borderRadius: 8,
   navType: 'light'
 };
 

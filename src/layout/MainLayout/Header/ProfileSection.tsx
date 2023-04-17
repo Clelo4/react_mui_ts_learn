@@ -13,7 +13,6 @@ import {
 } from '@mui/material';
 import { useAppTheme } from 'themes/hooks';
 import SettingsIcon from '@mui/icons-material/Settings';
-import avatarImg from 'assets/images/1.jpg';
 import { useRef, useState } from 'react';
 import MainCard from 'components/cards/MainCard';
 import { useAppDispatch, useAppSelector } from 'store/hooks';
@@ -68,7 +67,7 @@ export default function ProfileSection() {
         }}
         icon={
           <Avatar
-            src={avatarImg}
+            src={'./avatar.jpg'}
             sx={{
               ...theme.typography.mediumAvatar,
               margin: '8px 0 8px 8px !important',

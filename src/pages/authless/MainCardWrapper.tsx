@@ -18,7 +18,7 @@ export default function MainCardWrapper(props: React.PropsWithChildren) {
       <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <MainCard
           sx={{
-            maxWidth: { xs: 380, lg: 420 }
+            maxWidth: { xs: 400, lg: 460 }
           }}
         >
           {props.children}

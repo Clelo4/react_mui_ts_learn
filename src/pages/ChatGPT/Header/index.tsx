@@ -1,6 +1,6 @@
 import { Menu as MenuIcon } from '@mui/icons-material';
 import { Avatar, Box, IconButton, SxProps } from '@mui/material';
-import OpenAILogo from 'assets/images/OpenAILogo';
+import OpenAILogo from 'components/OpenAILogo';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import ZoomInMapIcon from '@mui/icons-material/ZoomInMap';
 

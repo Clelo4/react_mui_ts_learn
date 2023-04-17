@@ -92,12 +92,11 @@ export default function SignIn() {
             alignItems: 'center'
           }}
         >
-          <Box>
-            <Logo></Logo>
-          </Box>
-          <Typography component="h1" variant="h5">
-            Sign in
+          <Logo sx={{ marginBottom: '40px' }}></Logo>
+          <Typography variant="h2" sx={{ marginBottom: '20px', color: theme.palette.primary.main }}>
+            Hi, Welcome Back
           </Typography>
+          <Typography variant='h5'>Enter your credentials to continue</Typography>
           <Box component="form" onSubmit={onSubmit} sx={{ mt: 1 }} autoComplete="off">
             <TextField
               margin="normal"
