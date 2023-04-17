@@ -51,7 +51,7 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<Ma
       ...(open && {
         width: `calc(100% - ${(matchUpMd ? drawerWidth : 0) + margin * 2}px)`
       }),
-      ...theme.typography.mainContent,
+      ...theme.typography.mainContent
     };
   }
 );

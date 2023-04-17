@@ -21,7 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { logout as APILogout } from 'utils/api';
 import { useSnackbar } from 'notistack';
 import { setAuth } from 'store/account';
-import { AuthStateType } from 'enum';
+import { AuthStateType } from 'interface/enum';
 import { useNavigate } from 'react-router-dom';
 
 export default function ProfileSection() {

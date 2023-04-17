@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { AuthStateType } from '../enum';
+import { AuthStateType } from '../interface/enum';
 
 export const accountSlice = createSlice({
   name: 'account',

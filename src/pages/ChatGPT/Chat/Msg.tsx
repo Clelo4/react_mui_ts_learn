@@ -1,6 +1,8 @@
 import { Avatar, Box, Divider, Hidden, SxProps, Typography } from '@mui/material';
 import { useAppSelector } from 'store/hooks';
 import { useAppTheme } from 'themes/hooks';
+import ArrowLeftIcon from '@mui/icons-material/ArrowLeft';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 
 export interface MsgType {
   id: string;
@@ -15,6 +17,9 @@ export default function Msg(props: MsgType) {
   const isUser = props.type === 'user';
   const theme = useAppTheme();
   const customization = useAppSelector((state) => state.customization);
+
+  const ArrowIcon = isUser ? ArrowRightIcon : ArrowLeftIcon;
+
   return (
     <Box
       component="div"
@@ -22,13 +27,35 @@ export default function Msg(props: MsgType) {
         display: 'flex',
         justifyContent: 'flex-start',
         flexDirection: isUser ? 'row-reverse' : 'row',
-        alignItems: 'flex-start',
+        alignItems: 'stretch',
         margin: '24px auto',
         width: '100%'
       }}
     >
-      <Avatar sx={{ height: `${minHeight}px`, width: `${minHeight}px`, marginTop: '5px' }}></Avatar>
-      <Box sx={{ width: '16px', flexShrink: 0 }}></Box>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          width: '10px'
+        }}
+      >
+        <ArrowIcon
+          sx={{
+            height: '40px',
+            width: '40px',
+            position: 'relative',
+            color: theme.palette.primary.light,
+            ...(isUser
+              ? {
+                  left: '-18px'
+                }
+              : {
+                  right: '12px'
+                })
+          }}
+          // transform={scale}
+        ></ArrowIcon>
+      </Box>
       <Box
         component="div"
         sx={{
@@ -39,10 +66,9 @@ export default function Msg(props: MsgType) {
           padding: '16px'
         }}
       >
-        <Box></Box>
         <Typography sx={{ wordBreak: 'break-all', lineHeight: '18px' }}>{props.content}</Typography>
       </Box>
-      <Box sx={{ width: '48px', flexShrink: 0 }}></Box>
+      <Box sx={{ width: '12px', height: '100%', flexShrink: 0 }}></Box>
     </Box>
   );
 }

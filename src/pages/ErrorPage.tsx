@@ -23,7 +23,7 @@ export default class ErrorPage extends React.Component {
             }}
           >
             <Typography variant="h1" align="center" color="textPrimary">
-              404: The page you are looking for isn’t here
+              Something went wrong.
             </Typography>
             <Typography variant="subtitle2" color="textPrimary" align="center">
               You either tried some shady route or you came here by mistake. Whichever it is, try
